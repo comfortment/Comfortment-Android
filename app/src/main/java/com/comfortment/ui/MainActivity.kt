@@ -1,7 +1,8 @@
-package com.comfortment
+package com.comfortment.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.comfortment.R
 
 class MainActivity : AppCompatActivity() {
 
