@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav" app:startDestination="@id/MAIFragment">
+
+	<fragment android:id="@+id/MAIFragment" android:name="com.comfortment.presentation.ui.mai.MAIFragment"
+	          android:label="MAIFragment">
+		<action android:id="@+id/action_MAIFragment_to_MAIShowFragment" app:destination="@id/MAIShowFragment"/>
+	</fragment>
+	<fragment android:id="@+id/MAIShowFragment"
+	          android:name="com.comfortment.presentation.ui.mai.maiShow.MAIShowFragment"
+	          android:label="MAIShowFragment"/>
+	<fragment android:id="@+id/MAIEditFragment"
+	          android:name="com.comfortment.presentation.ui.mai.maiEdit.MAIEditFragment"
+	          android:label="MAIEditFragment"/>
+	<fragment android:id="@+id/AOSFragment" android:name="com.comfortment.presentation.ui.aos.AOSFragment"
+	          android:label="AOSFragment"/>
+	<activity android:id="@+id/mainActivity" android:name="com.comfortment.presentation.ui.MainActivity"
+	          android:label="activitiy_main" tools:layout="@layout/activity_main"/>
+</navigation>
