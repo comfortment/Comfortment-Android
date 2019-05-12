@@ -9,4 +9,7 @@ interface API {
     @POST("auth")
     @Headers("Content-Type: application/json")
     fun oauth(@Header("Authorization") authorization : String) : Call<Auth>
-}
+
+    @POST("emit/noise")
+    fun sendNotify()
+ }
