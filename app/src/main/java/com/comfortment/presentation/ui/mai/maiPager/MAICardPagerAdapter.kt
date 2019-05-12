@@ -18,8 +18,11 @@ class MAICardPagerAdapter : PagerAdapter(), CardAdapter {
     fun add(item: MAI?) {
         cards.add(null)
         maiList.add(null)
+    }
 
-        Log.e("asdf", cards.size.toString())
+    fun removeAll() {
+        cards.clear()
+        maiList.clear()
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean = view == `object`
@@ -38,7 +41,7 @@ class MAICardPagerAdapter : PagerAdapter(), CardAdapter {
         val cardView = view.findViewById<CardView>(R.id.mai_card)
         bind(maiList[position], cardView)
 
-        if(baseElevation == 0.0f) {
+        if (baseElevation == 0.0f) {
             baseElevation = cardView.cardElevation
         }
 
