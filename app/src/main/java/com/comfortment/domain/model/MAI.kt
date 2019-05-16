@@ -12,4 +12,4 @@ data class MAI(val uuid: UUID,
                val hateNoiseDescription:  String,
                val hateSmellDescriptionL: String,
                val etc: String,
-               val role: String)
+               val role: String) : Model()

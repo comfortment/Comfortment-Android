@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.MainActivity"
+    tools:context=".presentation.ui.main.MainActivity"
     android:id="@+id/nestedScrollView"
     tools:showIn="@layout/activity_main"
     tools:ignore="PrivateResource">

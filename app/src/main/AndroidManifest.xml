@@ -10,9 +10,10 @@
 			android:label="@string/app_name"
 			android:roundIcon="@drawable/ic_logo"
 			android:supportsRtl="true"
+			android:name=".presentation.ComfortmentApplication"
 			android:theme="@style/AppTheme">
 		<service
-				android:name=".presentation.ui.notification.DamageNotifyService"
+				android:name="com.comfortment.presentation.notification.DamageNotifyService"
 				android:enabled="true"
 				android:exported="true">
 			<intent-filter>
@@ -20,14 +21,14 @@
 			</intent-filter>
 		</service>
 
-		<activity android:name=".presentation.ui.MainActivity">
+		<activity android:name=".presentation.ui.start.StartActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".presentation.ui.TestActivity"/>
+		<activity android:name=".presentation.ui.main.MainActivity"/>
 
 		<meta-data
 				android:name="com.google.firebase.messaging.default_notification_icon"
