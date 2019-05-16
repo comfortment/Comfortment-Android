@@ -1,8 +1,6 @@
 package com.comfortment.domain.model
 
-import java.util.*
-
-data class MAI(val uuid: UUID,
+data class MAI(val id: String,
                val buildingNumber: Int,
                val roomNumber: Int,
                val name: String,

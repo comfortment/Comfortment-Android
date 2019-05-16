@@ -1,4 +1,4 @@
-package com.comfortment.presentation.di
+package com.comfortment.presentation.di.module
 
 import com.comfortment.presentation.di.qualifier.PerActivity
 import com.comfortment.presentation.ui.main.MainActivity

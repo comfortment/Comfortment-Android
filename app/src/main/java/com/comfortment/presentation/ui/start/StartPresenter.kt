@@ -1,31 +1,28 @@
 package com.comfortment.presentation.ui.start
 
-import android.util.Log
 import com.comfortment.domain.usecases.auth.AuthUseCase
 import com.comfortment.presentation.di.qualifier.PerActivity
 import com.comfortment.presentation.rx.AppSchedulerProvider
+import com.comfortment.presentation.ui.base.BasePresenter
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @PerActivity
 class StartPresenter @Inject constructor(
-    private val authUseCase: AuthUseCase,
-    private var appSchedulerProvider: AppSchedulerProvider
-) : StartContract.Presenter {
+    authUseCase: AuthUseCase,
+    appSchedulerProvider: AppSchedulerProvider
+) : StartContract.Presenter, BasePresenter<StartContract.View>(authUseCase, appSchedulerProvider) {
 
     private var startView: StartContract.View? = null
-
-    private val compositeDisposable = CompositeDisposable()
 
     val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
     val facebookCallback = object : FacebookCallback<LoginResult> {
         override fun onSuccess(result: LoginResult?) {
             if (result?.accessToken != null) {
-                Log.e("success", result.accessToken?.token)
+                startView?.showLoading()
                 requestAuth(result.accessToken.token)
             }
         }
@@ -36,20 +33,16 @@ class StartPresenter @Inject constructor(
     }
 
     override fun findAuth() {
-        compositeDisposable.add(
-            authUseCase.createObservable()
-                .subscribeOn(appSchedulerProvider.io())
-                .observeOn(appSchedulerProvider.ui())
-                .subscribe({ startView?.moveMain() }, { startView?.showSignButton() })
-        )
+        if (auth.userId.isEmpty()) startView?.showSignButton()
+        else startView?.moveMain()
     }
 
     override fun requestAuth(token: String) {
         compositeDisposable.add(
-            authUseCase.createObservable(AuthUseCase.Params("facebook $token"))
+            authUseCase.createObservable(AuthUseCase.Params("facebook $token", false))
                 .subscribeOn(appSchedulerProvider.io())
                 .observeOn(appSchedulerProvider.ui())
-                .subscribe({ startView?.moveMain() }, { Log.e("asdf", "ㄴㄴ.....;;;") })
+                .subscribe({ startView?.moveMain() }, { startView?.hideLoading() })
         )
     }
 

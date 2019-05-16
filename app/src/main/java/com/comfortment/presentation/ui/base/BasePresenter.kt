@@ -1,9 +1,27 @@
 package com.comfortment.presentation.ui.base
 
-interface BasePresenter<T> {
+import androidx.room.EmptyResultSetException
+import com.comfortment.domain.model.Auth
+import com.comfortment.domain.usecases.auth.AuthUseCase
+import com.comfortment.presentation.rx.AppSchedulerProvider
+import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
 
-    fun takeView(view : T)
+abstract class BasePresenter<T>(
+    val authUseCase: AuthUseCase,
+    val appSchedulerProvider: AppSchedulerProvider
+) {
 
-    fun dropView()
+    val compositeDisposable = CompositeDisposable()
+    val auth: Auth = authUseCase.createObservable()
+        .map { it }
+        .doOnError { EmptyResultSetException("Not found!") }
+        .blockingGet(Auth())
 
+    fun refreshAuth(refreshToken: String): Single<Auth> =
+        authUseCase.createObservable(AuthUseCase.Params(refreshToken, true))
+
+    abstract fun takeView(view: T)
+
+    abstract fun dropView()
 }

@@ -1,4 +1,4 @@
-package com.comfortment.presentation.di
+package com.comfortment.presentation.di.module
 
 import android.app.Application
 import android.content.Context

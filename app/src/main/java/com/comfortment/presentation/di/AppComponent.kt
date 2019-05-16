@@ -4,7 +4,9 @@ import android.app.Application
 import com.comfortment.data.di.NetworkModule
 import com.comfortment.data.di.RepositoryModule
 import com.comfortment.presentation.ComfortmentApplication
-import com.comfortment.presentation.di.start.SignModule
+import com.comfortment.presentation.di.module.ActivityBindingModule
+import com.comfortment.presentation.di.module.AppModule
+import com.comfortment.presentation.di.module.AuthModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,8 +19,8 @@ import javax.inject.Singleton
         AppModule::class,
         NetworkModule::class,
         RepositoryModule::class,
+        AuthModule::class,
         ActivityBindingModule::class,
-        SignModule::class,
         AndroidSupportInjectionModule::class
     ]
 )

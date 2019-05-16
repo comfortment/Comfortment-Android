@@ -5,6 +5,7 @@ import com.comfortment.data.source.auth.AuthLocalDataSource
 import com.comfortment.data.source.auth.AuthRemoteDataSource
 import com.comfortment.domain.model.Auth
 import com.comfortment.domain.repository.AuthRepository
+import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -22,15 +23,15 @@ class AuthRepositoryImp @Inject constructor(
             }
             .doOnError { Throwable("Not found!") }
 
-    override fun refreshAuth(auth: Auth): Single<Auth> =
-        authRemoteDataSource.refreshAuth(auth.refreshToken)
+    override fun refreshAuth(refreshToken: String): Single<Auth> =
+        authRemoteDataSource.refreshAuth(refreshToken)
             .map { data ->
                 saveAuth(mapper.mapToDomain(data))
                 mapper.mapToDomain(data)
             }
             .doOnError { Throwable("Not found!") }
 
-    override fun getAuth(): Single<Auth> =
+    override fun getAuth(): Maybe<Auth> =
         authLocalDataSource.getAuth()
             .map { data -> mapper.mapToDomain(data) }
             .doOnError { Throwable("Not found!") }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.comfortment.R
 import com.comfortment.presentation.ui.base.BaseActivity
+import com.comfortment.presentation.ui.dialog.LoadingDialog
 import com.comfortment.presentation.ui.main.MainActivity
 import com.facebook.login.LoginManager
 import kotlinx.android.synthetic.main.activitiy_sign.*
@@ -18,21 +19,15 @@ class StartActivity : BaseActivity(), StartContract.View {
     @Inject
     lateinit var startPresenter: StartPresenter
 
+    private val loadingDialog = LoadingDialog.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        startPresenter.findAuth()
-        LoginManager.getInstance().registerCallback(startPresenter.callbackManager, startPresenter.facebookCallback)
-    }
-
-    override fun onResume() {
-        super.onResume()
         startPresenter.takeView(this)
-    }
+        startPresenter.findAuth()
 
-    override fun onPause() {
-        super.onPause()
-        startPresenter.dropView()
+        LoginManager.getInstance().registerCallback(startPresenter.callbackManager, startPresenter.facebookCallback)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -41,11 +36,15 @@ class StartActivity : BaseActivity(), StartContract.View {
     }
 
     override fun showSignButton() {
-        btn.visibility = View.VISIBLE
+        facebook_btn.visibility = View.VISIBLE
     }
 
     override fun moveMain() {
         startActivity(Intent(applicationContext, MainActivity::class.java))
         finish()
     }
+
+    override fun showLoading() = loadingDialog.show(supportFragmentManager, "Loading")
+
+    override fun hideLoading() = loadingDialog.dismiss()
 }

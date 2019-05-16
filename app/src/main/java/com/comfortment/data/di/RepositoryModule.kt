@@ -20,7 +20,7 @@ class RepositoryModule {
             context,
             AppDatabase::class.java,
             "comfortment.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
 
     @Provides
     @Singleton

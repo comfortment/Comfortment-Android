@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.comfortment.data.model.AuthEntity
-import io.reactivex.Single
+import io.reactivex.Maybe
 
 @Dao
 interface AuthDao {
@@ -13,5 +13,5 @@ interface AuthDao {
     fun insert(authEntity: AuthEntity)
 
     @Query("SELECT * FROM auth")
-    fun get() : Single<AuthEntity>
+    fun get() : Maybe<AuthEntity>
 }
