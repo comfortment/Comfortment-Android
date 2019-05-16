@@ -1,6 +1,7 @@
 package com.comfortment.data.di
 
 import com.comfortment.data.remote.api.AuthAPI
+import com.comfortment.data.remote.url
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -28,7 +29,7 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://hhnpfoltnj.execute-api.ap-northeast-2.amazonaws.com/dev/")
+            .baseUrl(url)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
