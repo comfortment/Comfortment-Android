@@ -11,5 +11,9 @@ interface AuthAPI {
 
     @GET("auth")
     @Headers("Content-Type: application/json")
-    fun oauth(@Header("Authorization") authorization : String) : Single<AuthEntity>
+    fun request(@Header("Authorization") authorization : String) : Single<AuthEntity>
+
+    @GET("refresh")
+    @Headers("Content-Type: application/json")
+    fun refresh(@Header("Authorization") authorization : String) : Single<AuthEntity>
  }

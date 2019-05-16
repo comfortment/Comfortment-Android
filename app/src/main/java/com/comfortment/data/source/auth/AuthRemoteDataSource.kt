@@ -7,6 +7,8 @@ import javax.inject.Inject
 
 class AuthRemoteDataSource @Inject constructor(private val api: AuthAPI) {
 
-    fun requestAuth(token: String) : Single<AuthEntity> = api.oauth(token)
+    fun requestAuth(loginToken: String): Single<AuthEntity> = api.request(loginToken)
+
+    fun refreshAuth(refreshToken: String): Single<AuthEntity> = api.refresh(refreshToken)
 
 }

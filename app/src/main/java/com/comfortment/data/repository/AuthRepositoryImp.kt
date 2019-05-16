@@ -18,7 +18,16 @@ class AuthRepositoryImp @Inject constructor(
         authRemoteDataSource.requestAuth(token)
             .map { data ->
                 saveAuth(mapper.mapToDomain(data))
-                mapper.mapToDomain(data) }
+                mapper.mapToDomain(data)
+            }
+            .doOnError { Throwable("Not found!") }
+
+    override fun refreshAuth(auth: Auth): Single<Auth> =
+        authRemoteDataSource.refreshAuth(auth.refreshToken)
+            .map { data ->
+                saveAuth(mapper.mapToDomain(data))
+                mapper.mapToDomain(data)
+            }
             .doOnError { Throwable("Not found!") }
 
     override fun getAuth(): Single<Auth> =
