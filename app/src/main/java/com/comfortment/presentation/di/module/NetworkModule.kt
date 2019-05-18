@@ -1,4 +1,4 @@
-package com.comfortment.data.di
+package com.comfortment.presentation.di.module
 
 import com.comfortment.data.remote.api.AuthAPI
 import com.comfortment.data.remote.api.MaiAPI

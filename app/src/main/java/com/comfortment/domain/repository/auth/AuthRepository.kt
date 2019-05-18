@@ -1,4 +1,4 @@
-package com.comfortment.domain.repository
+package com.comfortment.domain.repository.auth
 
 import com.comfortment.domain.model.Auth
 import io.reactivex.Maybe

@@ -1,7 +1,7 @@
 package com.comfortment.data.source.auth
 
 import com.comfortment.data.local.db.AppDatabase
-import com.comfortment.data.model.AuthEntity
+import com.comfortment.data.model.auth.AuthEntity
 import io.reactivex.Maybe
 import javax.inject.Inject
 

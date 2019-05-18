@@ -1,10 +1,10 @@
 package com.comfortment.data.repository
 
-import com.comfortment.data.model.AuthEntityMapper
+import com.comfortment.data.model.auth.AuthEntityMapper
 import com.comfortment.data.source.auth.AuthLocalDataSource
 import com.comfortment.data.source.auth.AuthRemoteDataSource
 import com.comfortment.domain.model.Auth
-import com.comfortment.domain.repository.AuthRepository
+import com.comfortment.domain.repository.auth.AuthRepository
 import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject

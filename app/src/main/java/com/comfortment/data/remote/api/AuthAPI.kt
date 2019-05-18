@@ -1,11 +1,10 @@
 package com.comfortment.data.remote.api
 
-import com.comfortment.data.model.AuthEntity
+import com.comfortment.data.model.auth.AuthEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
-import retrofit2.http.POST
 
 interface AuthAPI {
 

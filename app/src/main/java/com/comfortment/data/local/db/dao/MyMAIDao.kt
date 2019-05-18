@@ -4,14 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.comfortment.data.model.auth.AuthEntity
+import com.comfortment.data.model.mai.MyMAIEntity
 import io.reactivex.Maybe
 
 @Dao
-interface AuthDao {
+interface MyMAIDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(authEntity: AuthEntity)
+    fun insert(myMAIEntity: MyMAIEntity)
 
-    @Query("SELECT * FROM auth")
-    fun get() : Maybe<AuthEntity>
+    @Query("SELECT * FROM mymai")
+    fun get() : Maybe<MyMAIEntity>
 }
