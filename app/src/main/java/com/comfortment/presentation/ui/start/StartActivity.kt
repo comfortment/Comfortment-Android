@@ -2,13 +2,11 @@ package com.comfortment.presentation.ui.start
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import com.comfortment.R
 import com.comfortment.presentation.ui.base.BaseActivity
 import com.comfortment.presentation.ui.dialog.LoadingDialog
 import com.comfortment.presentation.ui.main.MainActivity
 import com.facebook.login.LoginManager
-import kotlinx.android.synthetic.main.activitiy_sign.*
 import javax.inject.Inject
 
 class StartActivity : BaseActivity(), StartContract.View {
@@ -31,12 +29,8 @@ class StartActivity : BaseActivity(), StartContract.View {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        startPresenter.callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    override fun showSignButton() {
-        facebook_btn.visibility = View.VISIBLE
+        if(startPresenter.callbackManager.onActivityResult(requestCode, resultCode, data)) return
     }
 
     override fun moveMain() {

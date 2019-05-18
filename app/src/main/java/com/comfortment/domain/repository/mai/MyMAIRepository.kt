@@ -8,5 +8,5 @@ import io.reactivex.Single
 interface MyMAIRepository {
     fun bringAI(): Maybe<MyMAI>
     fun saveAI(myMAI: MyMAI)
-    fun loadAI(id: String): Single<MAI>
+    fun loadAI(accessToken: String, id: String): Single<MAI>
 }

@@ -7,9 +7,9 @@ import io.reactivex.Single
 
 class LoadMyMAIUseCase(private val myMAIRepository: MyMAIRepository) : UseCase<LoadMyMAIUseCase.Params, Single<MAI>>() {
 
-    override fun createObservable(params: Params): Single<MAI> = myMAIRepository.loadAI(params.id)
+    override fun createObservable(params: Params): Single<MAI> = myMAIRepository.loadAI(params.accessToken, params.id)
 
     override fun onCleared() {}
 
-    class Params(val id: String)
+    class Params(val accessToken: String, val id: String)
 }

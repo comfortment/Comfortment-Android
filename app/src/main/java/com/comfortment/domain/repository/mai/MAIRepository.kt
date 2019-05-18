@@ -6,7 +6,7 @@ import io.reactivex.Single
 import retrofit2.Response
 
 interface MAIRepository {
-    fun getBuildingAI(buildingNumber: Int): Single<List<MAI>>
-    fun getFloorAI(buildingNumber: Int, floor: Int): Single<List<MAI>>
-    fun registerAI(mai: MAI): Observable<Response<Any>>
+    fun getBuildingAI(accessToken: String, buildingNumber: Int): Single<List<MAI>>
+    fun getFloorAI(accessToken: String, buildingNumber: Int, floor: Int): Single<List<MAI>>
+    fun registerAI(accessToken: String, mai: MAI): Observable<Response<Any>>
 }

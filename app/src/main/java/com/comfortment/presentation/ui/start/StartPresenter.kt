@@ -7,6 +7,7 @@ import com.comfortment.presentation.ui.base.BasePresenter
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import javax.inject.Inject
 
@@ -33,8 +34,10 @@ class StartPresenter @Inject constructor(
     }
 
     override fun findAuth() {
-        if (auth.userId.isEmpty()) startView?.showSignButton()
-        else startView?.moveMain()
+        if (auth.userId.isEmpty())
+            LoginManager.getInstance().logOut()
+        else
+            startView?.moveMain()
     }
 
     override fun requestAuth(token: String) {

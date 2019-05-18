@@ -5,8 +5,6 @@ import com.comfortment.presentation.ui.base.BaseView
 interface StartContract {
 
     interface View : BaseView<Presenter> {
-        fun showSignButton()
-
         fun moveMain()
 
         fun showLoading()

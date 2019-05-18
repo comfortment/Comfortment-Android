@@ -14,9 +14,14 @@ abstract class BasePresenter<T>(
 
     val compositeDisposable = CompositeDisposable()
     val auth: Auth = authUseCase.createObservable()
-        .map { it }
+        .map {
+            accessToken = it.accessToken
+            it
+        }
         .doOnError { EmptyResultSetException("Not found!") }
         .blockingGet(Auth())
+
+    lateinit var accessToken: String
 
     fun refreshAuth(refreshToken: String): Single<Auth> =
         authUseCase.createObservable(AuthUseCase.Params(refreshToken, true))

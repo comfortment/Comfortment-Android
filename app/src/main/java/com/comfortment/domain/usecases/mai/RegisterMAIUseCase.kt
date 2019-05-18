@@ -6,10 +6,12 @@ import com.comfortment.domain.usecases.UseCase
 import io.reactivex.Observable
 import retrofit2.Response
 
-class RegisterMAIUseCase(private val maiRepository: MAIRepository) : UseCase<RegisterMAIUseCase.Params, Observable<Response<Any>>>() {
+class RegisterMAIUseCase(private val maiRepository: MAIRepository) :
+    UseCase<RegisterMAIUseCase.Params, Observable<Response<Any>>>() {
 
     override fun createObservable(params: Params): Observable<Response<Any>> =
         maiRepository.registerAI(
+            params.accessToken,
             MAI(
                 params.id,
                 params.buildingNumber,
@@ -28,6 +30,7 @@ class RegisterMAIUseCase(private val maiRepository: MAIRepository) : UseCase<Reg
     override fun onCleared() {}
 
     class Params(
+        val accessToken: String,
         val id: String,
         val buildingNumber: Int,
         val roomNumber: Int,

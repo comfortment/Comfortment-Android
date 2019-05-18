@@ -21,23 +21,23 @@ class MAIRepositoryImp @Inject constructor(
     private val myMAIEntityMapper: MyMAIEntityMapper
 ) : MAIRepository, MyMAIRepository {
 
-    override fun loadAI(id: String): Single<MAI> =
-        maiRemoteDataSource.loadMyAI(id)
+    override fun loadAI(accessToken: String, id: String): Single<MAI> =
+        maiRemoteDataSource.loadMyAI(accessToken, id)
             .map { data ->
                 saveAI(MyMAI(data.id, data.buildingNumber, data.roomNumber))
                 data
             }
             .doOnError { Throwable("Not found!") }
 
-    override fun getBuildingAI(buildingNumber: Int): Single<List<MAI>> =
-        maiRemoteDataSource.buildingAI(buildingNumber)
+    override fun getBuildingAI(accessToken: String, buildingNumber: Int): Single<List<MAI>> =
+        maiRemoteDataSource.buildingAI(accessToken, buildingNumber)
 
 
-    override fun getFloorAI(buildingNumber: Int, floor: Int): Single<List<MAI>> =
-        maiRemoteDataSource.floorAI(buildingNumber, floor)
+    override fun getFloorAI(accessToken: String, buildingNumber: Int, floor: Int): Single<List<MAI>> =
+        maiRemoteDataSource.floorAI(accessToken, buildingNumber, floor)
 
-    override fun registerAI(mai: MAI): Observable<Response<Any>> =
-        maiRemoteDataSource.registerAI(maiEntityMapper.mapToEntity(mai))
+    override fun registerAI(accessToken: String, mai: MAI): Observable<Response<Any>> =
+        maiRemoteDataSource.registerAI(accessToken, maiEntityMapper.mapToEntity(mai))
 
     override fun bringAI(): Maybe<MyMAI> =
         maiLocalDataSource.bringMyMAI()

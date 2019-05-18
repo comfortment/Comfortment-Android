@@ -8,15 +8,16 @@ import io.reactivex.Single
 class MAIUseCase(private val maiRepository: MAIRepository) : UseCase<MAIUseCase.Params, Single<List<MAI>>>() {
 
     override fun createObservable(params: Params): Single<List<MAI>> =
-        if (params.floor == 0) maiRepository.getBuildingAI(params.buildingNumber)
-        else maiRepository.getFloorAI(params.buildingNumber, params.floor)
+        if (params.floor == 0) maiRepository.getBuildingAI(params.accessToken, params.buildingNumber)
+        else maiRepository.getFloorAI(params.accessToken, params.buildingNumber, params.floor)
 
     override fun onCleared() {}
 
     data class Params(
+        val accessToken: String,
         val buildingNumber: Int,
         val floor: Int
     ) {
-        constructor(buildingNumber: Int) : this(buildingNumber, 0)
+        constructor(accessToken: String, buildingNumber: Int) : this(accessToken, buildingNumber, 0)
     }
 }
