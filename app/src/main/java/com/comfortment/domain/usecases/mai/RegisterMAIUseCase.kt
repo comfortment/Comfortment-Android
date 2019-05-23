@@ -7,9 +7,9 @@ import io.reactivex.Observable
 import retrofit2.Response
 
 class RegisterMAIUseCase(private val maiRepository: MAIRepository) :
-    UseCase<RegisterMAIUseCase.Params, Observable<Response<Any>>>() {
+    UseCase<RegisterMAIUseCase.Params, Observable<Response<Unit>>>() {
 
-    override fun createObservable(params: Params): Observable<Response<Any>> =
+    override fun createObservable(params: Params): Observable<Response<Unit>> =
         maiRepository.registerAI(
             params.accessToken,
             MAI(

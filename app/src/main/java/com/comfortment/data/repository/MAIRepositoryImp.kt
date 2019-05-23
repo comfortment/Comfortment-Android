@@ -36,7 +36,7 @@ class MAIRepositoryImp @Inject constructor(
     override fun getFloorAI(accessToken: String, buildingNumber: Int, floor: Int): Single<List<MAI>> =
         maiRemoteDataSource.floorAI(accessToken, buildingNumber, floor)
 
-    override fun registerAI(accessToken: String, mai: MAI): Observable<Response<Any>> =
+    override fun registerAI(accessToken: String, mai: MAI): Observable<Response<Unit>> =
         maiRemoteDataSource.registerAI(accessToken, maiEntityMapper.mapToEntity(mai))
 
     override fun bringAI(): Maybe<MyMAI> =

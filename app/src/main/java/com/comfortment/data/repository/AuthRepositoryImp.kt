@@ -1,5 +1,7 @@
 package com.comfortment.data.repository
 
+import android.util.Log
+import com.comfortment.data.model.auth.AuthEntity
 import com.comfortment.data.model.auth.AuthEntityMapper
 import com.comfortment.data.source.auth.AuthLocalDataSource
 import com.comfortment.data.source.auth.AuthRemoteDataSource
@@ -23,11 +25,13 @@ class AuthRepositoryImp @Inject constructor(
             }
             .doOnError { Throwable("Not found!") }
 
-    override fun refreshAuth(refreshToken: String): Single<Auth> =
+    override fun refreshAuth(refreshToken: String, userId: String): Single<Auth> =
         authRemoteDataSource.refreshAuth(refreshToken)
             .map { data ->
-                saveAuth(mapper.mapToDomain(data))
-                mapper.mapToDomain(data)
+                Log.e("asdf", data.accessToken)
+                val authEntity = AuthEntity(userId, data.accessToken, refreshToken)
+                saveAuth(mapper.mapToDomain(authEntity))
+                mapper.mapToDomain(authEntity)
             }
             .doOnError { Throwable("Not found!") }
 

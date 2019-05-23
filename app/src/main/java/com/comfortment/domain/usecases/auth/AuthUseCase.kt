@@ -11,11 +11,13 @@ class AuthUseCase(private val authRepository: AuthRepository) :
 
     override fun createObservable(params: Params): Single<Auth> =
         if (!params.isRefresh) authRepository.requestAuth(params.token)
-        else authRepository.refreshAuth(params.token)
+        else authRepository.refreshAuth(params.token, params.userId)
 
     fun createObservable(): Maybe<Auth> = authRepository.getAuth()
 
     override fun onCleared() {}
 
-    data class Params(val token: String, val isRefresh: Boolean)
+    data class Params(val token: String, val userId: String, val isRefresh: Boolean){
+        constructor(token : String) : this(token, "", false)
+    }
 }

@@ -30,5 +30,6 @@ interface MaiAPI {
     fun register(
         @Header("Authorization ") accessToken: String,
         @Body body: Any
-    ): Observable<Response<Any>>
+    ): Observable<Response<Unit>>
+
 }

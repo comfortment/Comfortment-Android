@@ -1,5 +1,6 @@
 package com.comfortment.presentation.ui.start
 
+import android.util.Log
 import com.comfortment.domain.usecases.auth.AuthUseCase
 import com.comfortment.presentation.di.qualifier.PerActivity
 import com.comfortment.presentation.rx.AppSchedulerProvider
@@ -12,10 +13,8 @@ import com.facebook.login.LoginResult
 import javax.inject.Inject
 
 @PerActivity
-class StartPresenter @Inject constructor(
-    authUseCase: AuthUseCase,
-    appSchedulerProvider: AppSchedulerProvider
-) : StartContract.Presenter, BasePresenter<StartContract.View>(authUseCase, appSchedulerProvider) {
+class StartPresenter @Inject constructor(authUseCase: AuthUseCase, appSchedulerProvider: AppSchedulerProvider) :
+    StartContract.Presenter, BasePresenter<StartContract.View>(authUseCase, appSchedulerProvider) {
 
     private var startView: StartContract.View? = null
 
@@ -36,15 +35,24 @@ class StartPresenter @Inject constructor(
     override fun findAuth() {
         if (auth.userId.isEmpty())
             LoginManager.getInstance().logOut()
-        else
-            startView?.moveMain()
+        else {
+            if (isExpirationToken()) {
+                startView?.showLoading()
+                compositeDisposable.add(
+                    refreshAuth(refreshToken)
+                        .subscribe({ startView?.moveMain() }, { startView?.hideLoading() })
+                )
+                Log.e("asdf", "qwre")
+            } else {
+                startView?.moveMain()
+                Log.e("asdf", "asadfdsfs")
+            }
+        }
     }
 
     override fun requestAuth(token: String) {
         compositeDisposable.add(
-            authUseCase.createObservable(AuthUseCase.Params("facebook $token", false))
-                .subscribeOn(appSchedulerProvider.io())
-                .observeOn(appSchedulerProvider.ui())
+            authUseCase.createObservable(AuthUseCase.Params("facebook $token"))
                 .subscribe({ startView?.moveMain() }, { startView?.hideLoading() })
         )
     }
