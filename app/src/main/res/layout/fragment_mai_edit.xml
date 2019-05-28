@@ -1,12 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-	<TextView android:layout_width="match_parent"
-	          android:layout_height="match_parent"
-	          android:text="mai edit"
-	          android:gravity="center"/>
+	<TextView android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:text="정보입력"
+	          android:textSize="16sp"
+	          android:textStyle="bold"
+	          android:textColor="#5C5A61"
+	          app:layout_constraintStart_toStartOf="parent"
+	          app:layout_constraintTop_toTopOf="parent"
+	          android:id="@+id/textView2"
+	          android:layout_marginTop="36dp"
+	          android:layout_marginStart="40dp"/>
+
+	<ScrollView
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:backgroundTint="@android:color/transparent"
+			android:nestedScrollingEnabled="false"
+			android:overScrollMode="never"
+			android:layout_gravity="center"
+			android:fillViewport="true"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/textView2"
+			app:layout_constraintBottom_toTopOf="@+id/materialButton">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center">
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline"
+					android:orientation="vertical"
+					app:layout_constraintGuide_percent="0.09975669"/>
+
+			<LinearLayout android:layout_width="0dp"
+			              android:layout_height="wrap_content"
+			              android:orientation="horizontal"
+			              android:id="@+id/search_ai"
+			              app:layout_constraintTop_toTopOf="parent"
+			              app:layout_constraintEnd_toEndOf="@+id/guideline2"
+			              app:layout_constraintStart_toStartOf="@+id/guideline">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.3"
+				          android:text="동 호수"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="46dp"
+				          android:id="@+id/textView"/>
+
+				<NumberPicker android:id="@+id/building_picker"
+				              android:layout_width="0dp"
+				              android:layout_height="112dp"
+				              android:layout_gravity="center"
+				              android:layout_weight="0.16"
+				              android:scaleY="0.7"
+				              android:theme="@style/DefaultNumberPickerTheme"/>
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="match_parent"
+				          android:layout_weight="0.1"
+				          android:layout_gravity="center"
+				          android:gravity="center"
+				          android:textColor="#5C5A61"
+				          android:textSize="12sp"
+				          android:text="동"/>
+
+				<NumberPicker android:id="@+id/floor_picker"
+				              android:layout_width="0dp"
+				              android:layout_height="112dp"
+				              android:layout_weight="0.15"
+				              android:scaleY="0.7"
+				              android:theme="@style/DefaultNumberPickerTheme"/>
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="match_parent"
+				          android:layout_weight="0.1"
+				          android:layout_gravity="center"
+				          android:gravity="center"
+				          android:textColor="#5C5A61"
+				          android:textSize="12sp"
+				          android:text="층"/>
+
+				<com.google.android.material.button.MaterialButton
+						style="@style/Widget.AppCompat.Button.Colored"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="0.2"
+						android:layout_gravity="center"
+						android:layout_marginStart="15dp"
+						android:backgroundTint="#5C5A61"
+						android:textColor="#FFFFFF"
+						app:cornerRadius="2dp"
+						android:paddingBottom="20dp"
+						android:paddingTop="20dp"
+						android:textSize="11sp"
+						android:text="이동"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/name"
+					android:paddingBottom="16dp"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/search_ai"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.165"
+				          android:text="이름"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="52dp"/>
+
+				<EditText android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.5"
+				          android:backgroundTint="@android:color/transparent"
+				          android:hint="홍길동"
+				          android:textSize="14sp"
+				          android:inputType="text"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/phone"
+					android:paddingBottom="16dp"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/name"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.165"
+				          android:text="핸드폰"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="52dp"/>
+
+				<EditText android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.5"
+				          android:backgroundTint="@android:color/transparent"
+				          android:hint="010 - 1234 - 5678"
+				          android:textSize="14sp"
+				          android:inputType="phone"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/noise_time"
+					android:paddingBottom="16dp"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/phone"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.165"
+				          android:text="방해금지"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:layout_marginEnd="52dp"/>
+
+				<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/disturb_list"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="0.5"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/noise_range"
+					android:paddingBottom="16dp"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/noise_time"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.25"
+				          android:text="소음 범위"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="10dp"
+				          android:textColor="#5C5A61"/>
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.12"
+				          android:text="0db"
+				          android:gravity="center_vertical|end"
+				          android:textSize="10sp"
+				          android:textColor="#5C5A61"/>
+
+				<SeekBar
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="0.7"/>
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.12"
+				          android:text="120db"
+				          android:gravity="center_vertical|start"
+				          android:textSize="10sp"
+				          android:textColor="#5C5A61"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/smell"
+					android:paddingBottom="16dp"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/noise_range"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.2"
+				          android:text="싫어하는 냄새"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:gravity="top"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="24dp"/>
+
+				<EditText android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.5"
+				          android:backgroundTint="@android:color/transparent"
+				          android:hint="싫어하는 냄새를 입력하세요."
+				          android:inputType="text"
+				          android:textSize="14sp"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/noise"
+					android:paddingBottom="16dp"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/smell"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.2"
+				          android:text="싫어하는 소리"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:gravity="top"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="24dp"/>
+
+				<EditText android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.5"
+				          android:backgroundTint="@android:color/transparent"
+				          android:hint="싫어하는 소리를 입력하세요."
+				          android:inputType="text"
+				          android:textSize="14sp"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:id="@+id/etc"
+					app:layout_constraintStart_toStartOf="@+id/guideline"
+					app:layout_constraintTop_toBottomOf="@+id/noise"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.2"
+				          android:text="기타 내용"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"
+				          android:gravity="top"
+				          android:layout_gravity="center"
+				          android:layout_marginEnd="24dp"/>
+
+				<EditText android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.5"
+				          android:backgroundTint="@android:color/transparent"
+				          android:hint="기타내용을 입력하세요."
+				          android:inputType="text"
+				          android:textSize="14sp"/>
+			</LinearLayout>
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline2"
+					android:orientation="vertical"
+					app:layout_constraintGuide_percent="0.9026764"/>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</ScrollView>
+
+	<com.google.android.material.button.MaterialButton
+			style="@style/Widget.AppCompat.Button.Colored"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:backgroundTint="#8C807D"
+			android:textColor="#FFFFFF"
+			app:cornerRadius="3dp"
+			android:paddingBottom="16dp"
+			android:paddingTop="16dp"
+			android:text="수정완료"
+			android:layout_marginBottom="26dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			android:layout_marginEnd="40dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			android:layout_marginStart="40dp"
+			app:layout_constraintStart_toStartOf="parent"
+			android:id="@+id/materialButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

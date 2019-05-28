@@ -40,7 +40,14 @@ class StartPresenter @Inject constructor(authUseCase: AuthUseCase, appSchedulerP
                 startView?.showLoading()
                 compositeDisposable.add(
                     refreshAuth(refreshToken)
-                        .subscribe({ startView?.moveMain() }, { startView?.hideLoading() })
+                        .subscribe({
+                            startView?.moveMain()
+                        }, {
+                            LoginManager.getInstance().logOut()
+                            startView?.hideLoading()
+                            startView?.showToast("재로그인이 필요합니다.")
+                            Log.e("asdf", it.message)
+                        })
                 )
                 Log.e("asdf", "qwre")
             } else {

@@ -35,9 +35,11 @@ class MainActivity : BaseActivity() {
         }
 
         fab.setOnClickListener {
-            if (currentFabAlignmentMode != BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
-                fab.hide(addVisibilityChanged)
-                invalidateOptionsMenu()
+            if (navController.currentDestination!!.id != R.id.MAIFragment) {
+                if(currentFabAlignmentMode != BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
+                    fab.hide(addVisibilityChanged)
+                    invalidateOptionsMenu()
+                }
                 navController.navigate(R.id.MAIFragment)
             }
         }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center">
+
+	<EditText android:layout_width="0dp"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="0.3"
+	          android:textSize="14sp"
+	          android:gravity="center"
+	          android:textColor="#5C5A61"
+	          android:textStyle="bold"
+	          android:backgroundTint="@android:color/transparent"
+	          android:hint="00시"/>
+
+	<TextView android:layout_width="0dp"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="0.2"
+	          android:textSize="14sp"
+	          android:gravity="center"
+	          android:textColor="#5C5A61"
+	          android:textStyle="bold"
+	          android:text=" ~ "/>
+
+	<EditText android:layout_width="0dp"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="0.3"
+	          android:textSize="14sp"
+	          android:gravity="center"
+	          android:textColor="#5C5A61"
+	          android:backgroundTint="@android:color/transparent"
+	          android:textStyle="bold"
+	          android:hint="00시"/>
+
+	<com.google.android.material.button.MaterialButton
+			style="@style/Widget.AppCompat.Button.Colored"
+			android:id="@+id/remove_btn"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="0.2"
+			android:layout_gravity="center"
+			android:backgroundTint="#CECDCF"
+			android:textColor="#5C5A61"
+			app:cornerRadius="32dp"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:text="삭제"/>
+
+</LinearLayout>

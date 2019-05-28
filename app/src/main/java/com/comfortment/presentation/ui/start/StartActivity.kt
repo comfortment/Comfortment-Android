@@ -2,6 +2,7 @@ package com.comfortment.presentation.ui.start
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.comfortment.R
 import com.comfortment.presentation.ui.base.BaseActivity
 import com.comfortment.presentation.ui.dialog.LoadingDialog
@@ -41,4 +42,6 @@ class StartActivity : BaseActivity(), StartContract.View {
     override fun showLoading() = loadingDialog.show(supportFragmentManager, "Loading")
 
     override fun hideLoading() = loadingDialog.dismiss()
+
+    override fun showToast(text: String) = Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
 }
