@@ -25,7 +25,7 @@ class MAIEditFragment : BaseFragment() {
         floor_picker.minValue = 1
         floor_picker.maxValue = 15
 
-        disturb_list.layoutManager = LinearLayoutManager(context).apply { reverseLayout = true }
+        disturb_list.layoutManager = LinearLayoutManager(context)
         disturb_list.adapter = disturbAdapter
     }
 }
