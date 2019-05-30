@@ -1,4 +1,4 @@
-package com.comfortment.data.model.mai
+package com.comfortment.data.model.auth
 
 import com.google.gson.annotations.SerializedName
 

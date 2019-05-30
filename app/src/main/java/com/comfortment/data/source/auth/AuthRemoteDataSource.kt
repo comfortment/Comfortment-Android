@@ -1,7 +1,7 @@
 package com.comfortment.data.source.auth
 
 import com.comfortment.data.model.auth.AuthEntity
-import com.comfortment.data.model.mai.AccessTokenEntity
+import com.comfortment.data.model.auth.AccessTokenEntity
 import com.comfortment.data.remote.api.AuthAPI
 import com.comfortment.presentation.rx.AppSchedulerProvider
 import io.reactivex.Single

@@ -22,14 +22,14 @@
 		          app:layout_constraintEnd_toEndOf="parent"
 		          app:layout_constraintTop_toTopOf="parent"
 		          android:layout_marginTop="12dp"
-		          android:id="@+id/textView3"/>
+		          android:id="@+id/room_number_tv"/>
 
 		<LinearLayout
 				android:layout_width="0dp"
 				android:layout_height="0dp"
 				app:layout_constraintEnd_toEndOf="@+id/guideline"
 				app:layout_constraintBottom_toBottomOf="@+id/guideline2"
-				app:layout_constraintTop_toBottomOf="@+id/textView3"
+				app:layout_constraintTop_toBottomOf="@+id/room_number_tv"
 				app:layout_constraintStart_toStartOf="parent"
 				android:id="@+id/linearLayout">
 
@@ -72,6 +72,7 @@
 							android:textColor="#5C5A61"/>
 
 					<TextView
+							android:id="@+id/noise_tv"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:text="-벽 뚫는 소리, 피아노 소리, 쿵쾅거리는 소리, 개짖는 소리"
@@ -101,6 +102,7 @@
 							android:textColor="#5C5A61"/>
 
 					<TextView
+							android:id="@+id/smell_tv"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:text="-생선 굽는 냄새, 쥐포 냄새 , 하수구 냄새 , 담배 냄새 , 술냄새"
@@ -131,6 +133,7 @@
 							android:textColor="#5C5A61"/>
 
 					<TextView
+							android:id="@+id/etc_tv"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:text="안녕하세요 잘부탁드립니다!!!"
@@ -149,7 +152,7 @@
 				android:layout_height="match_parent"
 				style="?android:attr/progressBarStyleHorizontal"
 				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/textView3"
+				app:layout_constraintTop_toBottomOf="@+id/room_number_tv"
 				app:layout_constraintBottom_toBottomOf="parent"
 				android:progressDrawable="@drawable/distrub_progress"
 				android:id="@+id/progressBar"/>

@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.comfortment.data.model.mai.MyMAIEntity
-import io.reactivex.Maybe
+import io.reactivex.Single
 
 @Dao
 interface MyMAIDao {
@@ -13,5 +13,5 @@ interface MyMAIDao {
     fun insert(myMAIEntity: MyMAIEntity)
 
     @Query("SELECT * FROM mymai")
-    fun get() : Maybe<MyMAIEntity>
+    fun get() : Single<MyMAIEntity>
 }

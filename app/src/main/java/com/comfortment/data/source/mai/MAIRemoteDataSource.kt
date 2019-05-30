@@ -1,9 +1,8 @@
 package com.comfortment.data.source.mai
 
-import com.comfortment.data.model.mai.MAIEntity
 import com.comfortment.data.remote.api.MaiAPI
+import com.comfortment.domain.model.MAI
 import com.comfortment.presentation.rx.AppSchedulerProvider
-import com.google.gson.Gson
 import io.reactivex.Observable
 import retrofit2.Response
 import javax.inject.Inject
@@ -28,8 +27,8 @@ class MAIRemoteDataSource @Inject constructor(
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
 
-    fun registerAI(accessToken: String, maiEntity: MAIEntity): Observable<Response<Unit>> =
-        maiAPI.register("Bearer $accessToken", Gson().toJson(maiEntity))
+    fun registerAI(accessToken: String, mai: MAI): Observable<Response<Unit>> =
+        maiAPI.register("Bearer $accessToken", mai)
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
 }

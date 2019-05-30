@@ -4,6 +4,7 @@ import com.comfortment.data.base.EntityMapper
 import com.comfortment.data.base.ModelEntity
 import com.comfortment.domain.model.MAI
 import com.google.gson.annotations.SerializedName
+import javax.inject.Inject
 
 data class MAIEntity(
     @SerializedName("id") val id: String,
@@ -14,12 +15,12 @@ data class MAIEntity(
     @SerializedName("disturbTimeRange") val disturbTimeRange: List<Pair<Int, Int>>,
     @SerializedName("acceptedDecibel") val acceptedDecibel: Int,
     @SerializedName("hateNoiseDescription") val hateNoiseDescription: String,
-    @SerializedName("hateSmellDescriptionL") val hateSmellDescription: String,
+    @SerializedName("hateSmellDescription") val hateSmellDescription: String,
     @SerializedName("etc") val etc: String,
     @SerializedName("role") val role: String
 ) : ModelEntity()
 
-class MAIEntityMapper : EntityMapper<MAI, MAIEntity> {
+class MAIEntityMapper @Inject constructor() : EntityMapper<MAI, MAIEntity> {
     override fun mapToDomain(entity: MAIEntity): MAI =
         MAI(
             entity.id,

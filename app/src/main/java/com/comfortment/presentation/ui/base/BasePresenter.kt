@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BasePresenter<T>(
     val authUseCase: AuthUseCase,
-    private val appSchedulerProvider: AppSchedulerProvider
+    val appSchedulerProvider: AppSchedulerProvider
 ) {
 
     val compositeDisposable = CompositeDisposable()

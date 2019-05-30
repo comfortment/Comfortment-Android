@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.comfortment.data.base.EntityMapper
 import com.comfortment.data.base.ModelEntity
 import com.comfortment.domain.model.MyMAI
+import javax.inject.Inject
 
 @Entity(tableName = "MyMAI")
 data class MyMAIEntity(
@@ -14,7 +15,7 @@ data class MyMAIEntity(
     @ColumnInfo(name = "roomNumber") val roomNumber: Int
 ) : ModelEntity()
 
-class MyMAIEntityMapper : EntityMapper<MyMAI, MyMAIEntity> {
+class MyMAIEntityMapper @Inject constructor() : EntityMapper<MyMAI, MyMAIEntity> {
     override fun mapToDomain(entity: MyMAIEntity): MyMAI =
         MyMAI(entity.id, entity.buildingNumber, entity.roomNumber)
 

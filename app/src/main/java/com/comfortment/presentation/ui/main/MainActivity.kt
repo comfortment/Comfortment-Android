@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.comfortment.R
 import com.comfortment.R.menu.edit_navigation
@@ -18,8 +19,15 @@ class MainActivity : BaseActivity() {
     override val layoutId: Int
         get() = R.layout.activity_main
 
+    lateinit var navController: NavController
     private var currentFabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-    private lateinit var navController: NavController
+
+    private val navOptions = NavOptions.Builder()
+        .setEnterAnim(R.anim.nav_default_enter_anim)
+        .setExitAnim(R.anim.nav_default_exit_anim)
+        .setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
+        .setPopExitAnim(R.anim.nav_default_pop_exit_anim)
+        .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +38,17 @@ class MainActivity : BaseActivity() {
             if (currentFabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
-                navController.navigate(R.id.AOSFragment)
+                navController.navigate(R.id.AOSFragment, null, navOptions)
             }
         }
 
         fab.setOnClickListener {
             if (navController.currentDestination!!.id != R.id.MAIFragment) {
-                if(currentFabAlignmentMode != BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
+                if (currentFabAlignmentMode != BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
                     fab.hide(addVisibilityChanged)
                     invalidateOptionsMenu()
                 }
-                navController.navigate(R.id.MAIFragment)
+                navController.navigate(R.id.MAIFragment, null, navOptions)
             }
         }
 
@@ -90,7 +98,7 @@ class MainActivity : BaseActivity() {
         when (item.itemId) {
             R.id.MAIEditFragment -> {
                 if (navController.currentDestination!!.id != R.id.MAIEditFragment) {
-                    navController.navigate(R.id.MAIEditFragment)
+                    navController.navigate(R.id.MAIEditFragment, null, navOptions)
                 }
             }
         }

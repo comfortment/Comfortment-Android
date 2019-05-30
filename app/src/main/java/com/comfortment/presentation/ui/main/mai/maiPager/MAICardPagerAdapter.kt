@@ -26,7 +26,7 @@ class MAICardPagerAdapter : PagerAdapter(), CardAdapter {
 
     fun add(item: MAI?) {
         cards.add(null)
-        maiList.add(null)
+        maiList.add(item)
     }
 
     fun removeAll() {
@@ -65,11 +65,9 @@ class MAICardPagerAdapter : PagerAdapter(), CardAdapter {
         cards[position] = null
     }
 
-    @SuppressLint("UseSparseArrays")
+    @SuppressLint("UseSparseArrays", "SetTextI18n")
     private fun bind(item: MAI?, view: View) {
-        val values = ArrayList<PieEntry>()
-        var distrub = ArrayList<Int>()
-        val distrubTime = ArrayList<Pair<Int, Int>>()
+/*        val distrubTime = ArrayList<Pair<Int, Int>>()
 
         distrubTime.add(Pair(1, 10))
         distrubTime.add(Pair(1, 23))
@@ -78,44 +76,55 @@ class MAICardPagerAdapter : PagerAdapter(), CardAdapter {
             for (i in it.first until it.second) {
                 distrub.add(i)
             }
-        }
-
-/*        item?.disturbTimeRange?.forEach {
-            for (i in it.first until it.second) {
-                distrub.add(i)
-            }
         }*/
 
-        distrub.sort()
-        distrub = ArrayList(distrub.toSet())
+        if (item != null) {
+            val values = ArrayList<PieEntry>()
+            var distrub = ArrayList<Int>()
 
-        val hash = HashMap<Int, Int>()
-        for (i in 0 until 23) {
-            hash[i] = 0xFFFFFFFF.toInt()
-        }
-
-        for (i in 0 until 23) {
-            distrub.forEach {
-                if (i == it - 1)
-                    hash[i] = Color.argb(255, 214, 151, 135)
+            item.disturbTimeRange.forEach {
+                for (i in it.first until it.second) {
+                    distrub.add(i)
+                }
             }
-            values.add(PieEntry(4f, i))
+
+            distrub.sort()
+            distrub = ArrayList(distrub.toSet())
+
+            val hash = HashMap<Int, Int>()
+            for (i in 0 until 23) {
+                hash[i] = 0xFFFFFFFF.toInt()
+            }
+
+            for (i in 0 until 23) {
+                distrub.forEach {
+                    if (i == it - 1)
+                        hash[i] = Color.argb(255, 214, 151, 135)
+                }
+                values.add(PieEntry(4f, i))
+            }
+
+            val dataSet = PieDataSet(values, "")
+            dataSet.colors = hash.values.toList()
+            dataSet.setDrawValues(false)
+            dataSet.form = Legend.LegendForm.EMPTY
+
+            val data = PieData(dataSet)
+            data.setValueFormatter(PercentFormatter())
+            view.distrub_chart.setTouchEnabled(false)
+            view.distrub_chart.description = Description().apply { isEnabled = false }
+            view.distrub_chart.transparentCircleRadius = 30f
+            view.distrub_chart.holeRadius = 15f
+            view.distrub_chart.data = data
+
+            view.distrub_chart.animateXY(800, 800)
+            ObjectAnimator.ofInt(view.progressBar, "progress", item.acceptedDecibel).setDuration(1000).start()
+
+
+            view.room_number_tv.text = "${item.roomNumber} 호"
+            view.noise_tv.text = item.hateNoiseDescription
+            view.smell_tv.text = item.hateSmellDescription
+            view.etc_tv.text = item.etc
         }
-
-        val dataSet = PieDataSet(values, "")
-        dataSet.colors = hash.values.toList()
-        dataSet.setDrawValues(false)
-        dataSet.form = Legend.LegendForm.EMPTY
-
-        val data = PieData(dataSet)
-        data.setValueFormatter(PercentFormatter())
-        view.distrub_chart.setTouchEnabled(false)
-        view.distrub_chart.description = Description().apply { isEnabled = false }
-        view.distrub_chart.transparentCircleRadius = 30f
-        view.distrub_chart.holeRadius = 15f
-        view.distrub_chart.data = data
-
-        view.distrub_chart.animateXY(800, 800)
-        ObjectAnimator.ofInt(view.progressBar, "progress", 79).setDuration(1000).start()
     }
 }

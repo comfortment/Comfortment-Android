@@ -1,7 +1,7 @@
 package com.comfortment.data.remote.api
 
 import com.comfortment.data.model.auth.AuthEntity
-import com.comfortment.data.model.mai.AccessTokenEntity
+import com.comfortment.data.model.auth.AccessTokenEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Header

@@ -6,10 +6,6 @@ interface StartContract {
 
     interface View : BaseView<Presenter> {
         fun moveMain()
-
-        fun showLoading()
-
-        fun hideLoading()
     }
 
     interface Presenter {

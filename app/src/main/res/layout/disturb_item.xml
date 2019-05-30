@@ -6,7 +6,8 @@
               android:layout_height="wrap_content"
               android:gravity="center">
 
-	<EditText android:layout_width="0dp"
+	<EditText android:id="@+id/first_edit"
+	          android:layout_width="0dp"
 	          android:layout_height="wrap_content"
 	          android:layout_weight="0.3"
 	          android:textSize="14sp"
@@ -14,6 +15,8 @@
 	          android:textColor="#5C5A61"
 	          android:textStyle="bold"
 	          android:backgroundTint="@android:color/transparent"
+	          android:inputType="time"
+	          android:maxLength="2"
 	          android:hint="00시"/>
 
 	<TextView android:layout_width="0dp"
@@ -25,7 +28,8 @@
 	          android:textStyle="bold"
 	          android:text=" ~ "/>
 
-	<EditText android:layout_width="0dp"
+	<EditText android:id="@+id/second_edit"
+	          android:layout_width="0dp"
 	          android:layout_height="wrap_content"
 	          android:layout_weight="0.3"
 	          android:textSize="14sp"
@@ -33,6 +37,8 @@
 	          android:textColor="#5C5A61"
 	          android:backgroundTint="@android:color/transparent"
 	          android:textStyle="bold"
+	          android:inputType="time"
+	          android:maxLength="2"
 	          android:hint="00시"/>
 
 	<com.google.android.material.button.MaterialButton

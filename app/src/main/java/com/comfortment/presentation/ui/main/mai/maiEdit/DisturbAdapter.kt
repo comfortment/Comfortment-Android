@@ -10,10 +10,11 @@ import kotlinx.android.synthetic.main.disturb_item.view.*
 
 class DisturbAdapter : RecyclerView.Adapter<DisturbAdapter.ViewHolder>() {
 
-    private val list = ArrayList<Int>()
+    private val maiList = ArrayList<Int>()
+    val viewList = ArrayList<ViewHolder?>()
 
     init {
-        list.add(0)
+        maiList.add(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -22,25 +23,28 @@ class DisturbAdapter : RecyclerView.Adapter<DisturbAdapter.ViewHolder>() {
             else LayoutInflater.from(parent.context).inflate(R.layout.disturb_item, parent, false)
         )
 
-    override fun getItemViewType(position: Int): Int = list[position]
+    override fun getItemViewType(position: Int): Int = maiList[position]
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder.itemView.add_btn != null) {
             holder.itemView.add_btn.setOnClickListener { add() }
         } else {
             holder.itemView.remove_btn.setOnClickListener { remove(position) }
+            viewList[position] = holder
         }
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = maiList.size
 
     private fun add() {
-        list.add(list.size - 1, 1)
+        maiList.add(maiList.size - 1, 1)
+        viewList.add(null)
         notifyDataSetChanged()
     }
 
     private fun remove(position: Int) {
-        list.removeAt(position)
+        maiList.removeAt(position)
+        viewList.removeAt(position)
         notifyDataSetChanged()
     }
 

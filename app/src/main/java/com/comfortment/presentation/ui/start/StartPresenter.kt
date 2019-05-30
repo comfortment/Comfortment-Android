@@ -69,6 +69,6 @@ class StartPresenter @Inject constructor(authUseCase: AuthUseCase, appSchedulerP
     }
 
     override fun dropView() {
-        startView = null
+        this.startView = null
     }
 }
