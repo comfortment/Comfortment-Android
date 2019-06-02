@@ -57,10 +57,22 @@ class MAIFragment : BaseFragment(), MAIContract.View, View.OnClickListener {
         shadowTransformer = ShadowTransformer(mai_pager, maiCardPagerAdapter)
         shadowTransformer.enableScaling(true)
         mai_pager.setPageTransformer(false, shadowTransformer)
+
+        hideNotFoundText()
     }
 
     override fun removeCard() {
         maiCardPagerAdapter.removeAll()
+    }
+
+    override fun showNotFoundText(isFoundMine: Boolean) {
+        if(isFoundMine) not_found_tv.text = "세대 정보가 없습니다."
+        else not_found_tv.text = "자신의 세대 정보를 입력해 주세요!"
+        not_found_tv.visibility = View.VISIBLE
+    }
+
+    override fun hideNotFoundText() {
+        not_found_tv.visibility = View.INVISIBLE
     }
 
     override fun showLoading() = loadingDialog.show(fragmentManager, "Loading")

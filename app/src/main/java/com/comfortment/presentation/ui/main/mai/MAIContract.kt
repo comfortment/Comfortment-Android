@@ -10,6 +10,10 @@ interface MAIContract {
 
         fun initCard(list: List<MAI>)
 
+        fun showNotFoundText(isFoundMine: Boolean)
+
+        fun hideNotFoundText()
+
         fun removeCard()
 
         fun moveEditPage()

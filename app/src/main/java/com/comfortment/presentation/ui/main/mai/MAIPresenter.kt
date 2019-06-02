@@ -35,11 +35,11 @@ class MAIPresenter @Inject constructor(
 
                     loadMAI(buildingNumber, floor).subscribe { list, er ->
                         if (list != null) maiView?.initCard(list)
-                        if (er != null) maiView?.showToast("세대 정보가 없습니다!")
+                        if (er != null) maiView?.showNotFoundText(true)
                     }
                 }
                 if (error != null) {
-                    maiView?.showToast("자신의 세대 정보를 입력해주세요!")
+                    maiView?.showNotFoundText(false)
                 }
                 maiView?.hideLoading()
             })
