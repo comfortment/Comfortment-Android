@@ -46,6 +46,8 @@ class MAIEditFragment : BaseFragment(), MAIEditContract.View, View.OnClickListen
 
         back_btn.setOnClickListener(this)
         edit_btn.setOnClickListener(this)
+
+        maiEditPresenter.loadMyMAI()
     }
 
     override fun onDestroyView() {
@@ -113,6 +115,30 @@ class MAIEditFragment : BaseFragment(), MAIEditContract.View, View.OnClickListen
                 }
             }
         }
+    }
+
+    override fun putMyMAI(
+        buildingNumber: Int,
+        roomNumber: Int,
+        name: String,
+        phoneNumber: String,
+        disturbTimeRange: List<List<Int>>,
+        acceptedDecibel: Int,
+        hateNoiseDescription: String,
+        hateSmellDescription: String,
+        etc: String
+    ) {
+        building_picker.value = buildingNumber
+        floor_picker.value = roomNumber
+        name_edit.setText(name)
+        phone_edit.setText(phoneNumber)
+        decibel_seek.progress = acceptedDecibel
+        noise_edit.setText(hateNoiseDescription)
+        smell_edit.setText(hateSmellDescription)
+        etc_edit.setText(etc)
+        edit_btn.text = "수정"
+
+        disturbAdapter.loadDisturbTimeRange(disturbTimeRange)
     }
 
     override fun moveMain() {

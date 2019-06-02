@@ -99,22 +99,9 @@
 				          android:gravity="center"
 				          android:textColor="#5C5A61"
 				          android:textSize="12sp"
-				          android:text="호실"/>
+				          android:text="호"/>
 
-				<com.google.android.material.button.MaterialButton
-						style="@style/Widget.AppCompat.Button.Colored"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:layout_weight="0.2"
-						android:layout_gravity="center"
-						android:layout_marginStart="15dp"
-						android:backgroundTint="#5C5A61"
-						android:textColor="#FFFFFF"
-						app:cornerRadius="2dp"
-						android:paddingBottom="20dp"
-						android:paddingTop="20dp"
-						android:textSize="11sp"
-						android:text="확인"/>
+
 			</LinearLayout>
 
 			<LinearLayout
@@ -352,7 +339,7 @@
 			app:cornerRadius="3dp"
 			android:paddingBottom="16dp"
 			android:paddingTop="16dp"
-			android:text="수정완료"
+			android:text="등록"
 			android:layout_marginBottom="26dp"
 			app:layout_constraintBottom_toBottomOf="parent"
 			android:layout_marginEnd="40dp"
