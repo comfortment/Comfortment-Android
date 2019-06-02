@@ -15,7 +15,7 @@ interface MAIEditContract {
             roomNumber: String,
             name: String,
             phoneNumber: String,
-            disturbTimeRange: ArrayList<Pair<Int, Int>>,
+            disturbTimeRange: List<List<Int>>,
             acceptedDecibel: Int,
             hateNoiseDescription: String,
             hateSmellDescription: String,

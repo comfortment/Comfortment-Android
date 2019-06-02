@@ -99,7 +99,7 @@
 				          android:gravity="center"
 				          android:textColor="#5C5A61"
 				          android:textSize="12sp"
-				          android:text="층"/>
+				          android:text="호실"/>
 
 				<com.google.android.material.button.MaterialButton
 						style="@style/Widget.AppCompat.Button.Colored"

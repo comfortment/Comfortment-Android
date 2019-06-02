@@ -36,7 +36,7 @@ class RegisterMAIUseCase(private val maiRepository: MAIRepository) :
         val roomNumber: Int,
         val name: String,
         val phoneNumber: String,
-        val disturbTimeRange: ArrayList<Pair<Int, Int>>,
+        val disturbTimeRange: List<List<Int>>,
         val acceptedDecibel: Int,
         val hateNoiseDescription: String,
         val hateSmellDescription: String,

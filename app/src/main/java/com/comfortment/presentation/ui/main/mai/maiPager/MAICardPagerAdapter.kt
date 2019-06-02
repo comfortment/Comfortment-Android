@@ -67,23 +67,12 @@ class MAICardPagerAdapter : PagerAdapter(), CardAdapter {
 
     @SuppressLint("UseSparseArrays", "SetTextI18n")
     private fun bind(item: MAI?, view: View) {
-/*        val distrubTime = ArrayList<Pair<Int, Int>>()
-
-        distrubTime.add(Pair(1, 10))
-        distrubTime.add(Pair(1, 23))
-
-        distrubTime.forEach {
-            for (i in it.first until it.second) {
-                distrub.add(i)
-            }
-        }*/
-
         if (item != null) {
             val values = ArrayList<PieEntry>()
             var distrub = ArrayList<Int>()
 
             item.disturbTimeRange.forEach {
-                for (i in it.first until it.second) {
+                for (i in it[0] until it[1]) {
                     distrub.add(i)
                 }
             }

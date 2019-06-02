@@ -39,7 +39,6 @@ class MAIPresenter @Inject constructor(
                     }
                 }
                 if (error != null) {
-                    maiView?.moveEditPage()
                     maiView?.showToast("자신의 세대 정보를 입력해주세요!")
                 }
                 maiView?.hideLoading()

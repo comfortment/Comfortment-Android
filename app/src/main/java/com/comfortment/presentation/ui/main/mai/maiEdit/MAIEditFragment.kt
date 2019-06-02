@@ -69,16 +69,20 @@ class MAIEditFragment : BaseFragment(), MAIEditContract.View, View.OnClickListen
                 val hateSmellDescription = smell_edit.text.toString()
                 val etc = etc_edit.text.toString()
 
-                val disturbPairList = ArrayList<Pair<Int, Int>>()
+                val disturbPairList = ArrayList<ArrayList<Int>>()
 
                 try {
                     disturbAdapter.viewList.forEach {
                         if (it != null) {
+                            val list = ArrayList<Int>()
                             val first = it.itemView.first_edit.text.toString().toInt()
                             val second = it.itemView.second_edit.text.toString().toInt()
 
+                            list.add(first)
+                            list.add(second)
+
                             if (first in 0..24 && second in 0..24 && first < second) {
-                                disturbPairList.add(Pair(first, second))
+                                disturbPairList.add(list)
                             } else {
                                 throw Exception()
                             }

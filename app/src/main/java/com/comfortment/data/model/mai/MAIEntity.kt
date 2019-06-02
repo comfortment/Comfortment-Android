@@ -12,7 +12,7 @@ data class MAIEntity(
     @SerializedName("roomNumber") val roomNumber: Int,
     @SerializedName("name") val name: String,
     @SerializedName("phoneNumber") val phoneNumber: String,
-    @SerializedName("disturbTimeRange") val disturbTimeRange: List<Pair<Int, Int>>,
+    @SerializedName("disturbTimeRange") val disturbTimeRange: List<List<Int>>,
     @SerializedName("acceptedDecibel") val acceptedDecibel: Int,
     @SerializedName("hateNoiseDescription") val hateNoiseDescription: String,
     @SerializedName("hateSmellDescription") val hateSmellDescription: String,
