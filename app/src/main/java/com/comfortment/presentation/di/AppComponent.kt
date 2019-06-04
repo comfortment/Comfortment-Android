@@ -17,6 +17,7 @@ import javax.inject.Singleton
         RepositoryModule::class,
         AuthModule::class,
         MAIModule::class,
+        NanumModule::class,
         ActivityBindingModule::class,
         FragmentBindingModule::class,
         AndroidSupportInjectionModule::class

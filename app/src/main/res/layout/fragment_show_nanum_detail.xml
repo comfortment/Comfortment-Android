@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fitsSystemWindows="true">
+
+	<com.google.android.material.appbar.AppBarLayout
+			android:layout_width="match_parent"
+			android:layout_height="256dp"
+			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+			android:fitsSystemWindows="true"
+			app:elevation="0dp"
+			android:id="@+id/app_bar">
+
+		<com.google.android.material.appbar.CollapsingToolbarLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				app:layout_scrollFlags="scroll|exitUntilCollapsed"
+				android:fitsSystemWindows="true"
+				app:contentScrim="#FAFAFA">
+
+			<ImageView
+					android:id="@+id/backdrop"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:scaleType="centerCrop"
+					android:fitsSystemWindows="true"
+					app:layout_collapseMode="parallax"
+					android:src="@mipmap/ic_launcher"
+					android:foreground="@drawable/nanum_detail_gradient"/>
+
+			<androidx.appcompat.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					android:layout_height="?attr/actionBarSize"
+					app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+					app:layout_collapseMode="pin">
+
+				<ImageButton
+						android:id="@+id/back_btn"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:padding="24dp"
+						android:backgroundTint="@color/colorPrimary"
+						android:background="@drawable/ic_keyboard_arrow_left"/>
+
+			</androidx.appcompat.widget.Toolbar>
+
+		</com.google.android.material.appbar.CollapsingToolbarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.core.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"
+			android:fillViewport="true"
+			android:id="@+id/scroll_view">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+			<TextView android:id="@+id/title_tv"
+			          android:layout_width="0dp"
+			          android:layout_height="wrap_content"
+			          android:text="타이틀"
+			          android:textSize="18sp"
+			          android:textStyle="bold"
+			          android:textColor="#5C5A61"
+			          app:layout_constraintEnd_toStartOf="@+id/guideline2"
+			          app:layout_constraintStart_toStartOf="@+id/guideline3"
+			          app:layout_constraintTop_toTopOf="@+id/guideline4"/>
+
+			<LinearLayout
+					android:id="@+id/price_layout"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_marginTop="46dp"
+					app:layout_constraintTop_toBottomOf="@+id/title_tv"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2"
+					app:layout_constraintStart_toStartOf="@+id/guideline3">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.1"
+				          android:text="가격"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"/>
+
+				<TextView android:id="@+id/price"
+				          android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.9"
+				          android:text="20,000원"
+				          android:textSize="10sp"
+				          android:textColor="#FF5722"
+				          android:paddingStart="38dp"
+				          android:paddingLeft="38dp"
+				          tools:ignore="RtlHardcoded,RtlSymmetry"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:id="@+id/pay_at_layout"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_marginTop="26dp"
+					app:layout_constraintTop_toBottomOf="@+id/price_layout"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2"
+					app:layout_constraintStart_toStartOf="@+id/guideline3">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.1"
+				          android:text="선불"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"/>
+
+				<TextView android:id="@+id/pay_at"
+				          android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.9"
+				          android:text="후불"
+				          android:textSize="10sp"
+				          android:textColor="#FF5722"
+				          android:paddingStart="38dp"
+				          android:paddingLeft="38dp"
+				          tools:ignore="RtlHardcoded,RtlSymmetry"/>
+			</LinearLayout>
+
+			<LinearLayout
+					android:id="@+id/remain_date_layout"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_marginTop="26dp"
+					app:layout_constraintTop_toBottomOf="@+id/pay_at_layout"
+					app:layout_constraintEnd_toStartOf="@+id/guideline2"
+					app:layout_constraintStart_toStartOf="@+id/guideline3">
+
+				<TextView android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.2"
+				          android:text="남은 기간"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"/>
+
+				<TextView android:id="@+id/remain_date_tv"
+				          android:layout_width="0dp"
+				          android:layout_height="wrap_content"
+				          android:layout_weight="0.8"
+				          android:text="20일"
+				          android:textSize="10sp"
+				          android:textColor="#FF5722"
+				          android:paddingStart="12dp"
+				          android:paddingLeft="12dp"
+				          tools:ignore="RtlHardcoded,RtlSymmetry"/>
+			</LinearLayout>
+
+			<TextView
+					android:id="@+id/description_tv"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="62dp"
+					android:text="이것은 우리나라의 국기인 태극기 일러스트입니다.
+어쩌구 저쩌구등등의 이야기를 이곳에 적으시면 됩니다.
+20,000원에 팔 생각입니다."
+					android:textSize="12sp"
+					android:textColor="#5C5A61"
+					app:layout_constraintTop_toBottomOf="@+id/remain_date_layout"
+					app:layout_constraintEnd_toStartOf="@+id/guideline1"
+					app:layout_constraintStart_toStartOf="@+id/guideline3"/>
+
+			<LinearLayout
+					android:id="@+id/state_layout"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_marginTop="62dp"
+					app:layout_constraintTop_toBottomOf="@+id/description_tv"
+					app:layout_constraintEnd_toStartOf="@+id/guideline1"
+					app:layout_constraintStart_toStartOf="@+id/guideline3">
+
+				<TextView android:layout_width="match_parent"
+				          android:layout_height="wrap_content"
+				          android:text="진행 진도"
+				          android:textSize="12sp"
+				          android:textStyle="bold"
+				          android:textColor="#5C5A61"/>
+
+				<com.warkiz.widget.IndicatorSeekBar
+						android:id="@+id/state_bar"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="34dp"
+						android:paddingTop="16dp"
+						app:isb_progress="0"
+						app:isb_thumb_drawable="@drawable/ic_keyboard_arrow_right"
+						app:isb_indicator_color="@color/colorPrimary"
+						app:isb_track_progress_color="@color/colorPrimary"
+						app:isb_thumb_color="@android:color/transparent"
+						app:isb_tick_marks_drawable="@drawable/selector_tick_marks_drawable"
+						app:isb_tick_marks_ends_hide="true"
+						app:isb_tick_marks_size="24dp"
+						android:backgroundTint="@color/colorPrimary"
+						app:isb_ticks_count="5"/>
+
+				<LinearLayout android:layout_width="match_parent"
+				              android:layout_height="wrap_content"
+				              android:orientation="horizontal"
+				              android:paddingStart="16dp"
+				              android:paddingEnd="16dp">
+
+					<TextView android:layout_width="0dp"
+					          android:layout_height="wrap_content"
+					          android:layout_weight="0.25"
+					          android:textSize="12sp"
+					          android:textStyle="bold"
+					          android:textColor="#5C5A61"
+					          android:gravity="start"
+					          android:text="모집중"/>
+
+					<TextView android:layout_width="0dp"
+					          android:layout_height="wrap_content"
+					          android:layout_weight="0.25"
+					          android:textSize="12sp"
+					          android:textStyle="bold"
+					          android:textColor="#5C5A61"
+					          android:gravity="center"
+					          android:text="결제 완료"/>
+
+					<TextView android:layout_width="0dp"
+					          android:layout_height="wrap_content"
+					          android:layout_weight="0.25"
+					          android:textSize="12sp"
+					          android:textStyle="bold"
+					          android:textColor="#5C5A61"
+					          android:gravity="center"
+					          android:text="진행중"/>
+
+					<TextView android:layout_width="0dp"
+					          android:layout_height="wrap_content"
+					          android:layout_weight="0.25"
+					          android:textSize="12sp"
+					          android:textStyle="bold"
+					          android:textColor="#5C5A61"
+					          android:gravity="end"
+					          android:text="완료"/>
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<ImageView android:layout_width="wrap_content"
+			           android:layout_height="wrap_content"
+			           android:src="@drawable/ic_star_border"
+			           app:layout_constraintEnd_toStartOf="@+id/guideline1"
+			           app:layout_constraintTop_toTopOf="@+id/guideline4"
+			           android:id="@+id/star_btn"/>
+
+			<com.google.android.material.button.MaterialButton
+					style="@style/Widget.AppCompat.Button.Colored"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:backgroundTint="#8C807D"
+					android:textColor="#FFFFFF"
+					android:layout_marginTop="42dp"
+					android:paddingBottom="16dp"
+					android:paddingTop="16dp"
+					android:text="참여"
+					app:layout_constraintTop_toBottomOf="@+id/state_layout"
+					app:layout_constraintEnd_toStartOf="@+id/guideline1"
+					app:layout_constraintStart_toStartOf="@+id/guideline3"
+					android:id="@+id/join_btn"/>
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline1"
+					android:orientation="vertical"
+					app:layout_constraintGuide_percent="0.9"/>
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline2"
+					android:orientation="vertical"
+					app:layout_constraintGuide_percent="0.8"/>
+
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline3"
+					android:orientation="vertical"
+					app:layout_constraintGuide_percent="0.08"/>
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline4"
+					android:orientation="horizontal"
+					app:layout_constraintGuide_percent="0.06"/>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

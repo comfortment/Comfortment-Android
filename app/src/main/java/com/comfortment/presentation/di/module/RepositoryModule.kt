@@ -6,9 +6,11 @@ import com.comfortment.data.repository.AuthRepositoryImp
 import com.comfortment.data.local.db.AppDatabase
 import com.comfortment.data.model.auth.AuthEntityMapper
 import com.comfortment.data.repository.MAIRepositoryImp
+import com.comfortment.data.repository.NanumRepositoryImp
 import com.comfortment.domain.repository.auth.AuthRepository
 import com.comfortment.domain.repository.mai.MAIRepository
 import com.comfortment.domain.repository.mai.MyMAIRepository
+import com.comfortment.domain.repository.nanum.NanumRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -41,4 +43,9 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideMyMAIRepository(repository: MAIRepositoryImp): MyMAIRepository = repository
+
+    @Provides
+    @Singleton
+    fun provideNanumRepository(repository: NanumRepositoryImp): NanumRepository = repository
+
 }

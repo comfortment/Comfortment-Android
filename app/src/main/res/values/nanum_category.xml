@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="category">
+		<item >묶음구매</item>
+		<item >공동구매</item>
+		<item >떨이</item>
+		<item >도우미</item>
+	</string-array>
+</resources>

@@ -2,6 +2,7 @@ package com.comfortment.presentation.di.module
 
 import com.comfortment.data.remote.api.AuthAPI
 import com.comfortment.data.remote.api.MaiAPI
+import com.comfortment.data.remote.api.NanumAPI
 import com.comfortment.data.remote.url
 import dagger.Module
 import dagger.Provides
@@ -43,6 +44,11 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideMAIAPI(retrofit: Retrofit): MaiAPI = retrofit.create(MaiAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun provideNanumAPI(retrofit: Retrofit): NanumAPI = retrofit.create(NanumAPI::class.java)
+
 
     private fun makeLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
