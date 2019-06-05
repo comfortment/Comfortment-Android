@@ -4,4 +4,6 @@ data class MyMAI(
     val id: String,
     val buildingNumber: Int,
     val roomNumber: Int
-) : Model()
+) : Model() {
+    constructor() : this("", 0, 0)
+}

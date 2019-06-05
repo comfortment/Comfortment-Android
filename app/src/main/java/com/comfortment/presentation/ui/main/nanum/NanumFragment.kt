@@ -56,8 +56,8 @@ class NanumFragment : BaseFragment(), NanumContract.View {
         nanumPresenter.takeView(this)
     }
 
-    override fun moveShowDetail(nanumId: String) =
-        findNavController().navigate(NanumFragmentDirections.actionAOSFragmentToShowNanumDetailFragment(nanumId))
+    override fun moveShowDetail(nanumId: String, isRaised: Boolean) =
+        findNavController().navigate(NanumFragmentDirections.actionAOSFragmentToShowNanumDetailFragment(nanumId, isRaised))
 
     override fun initNanumList(nanum: Nanum) = nanumAdapter.add(nanum)
 

@@ -8,6 +8,8 @@ PayAt = "Advanced" | "Deferred";
 Path = string;
 
 NanumId = string;
+
+CurrentState = "recruiting" | "paid" | "processing" | "done";
  */
 data class Nanum(
     val nanumId: String,
@@ -25,5 +27,6 @@ data class Nanum(
     val description: String?,
     val referTo: String?,
     val payAt: String?,
-    val title: String
+    val title: String,
+    val currentState: String
 ) : Model()

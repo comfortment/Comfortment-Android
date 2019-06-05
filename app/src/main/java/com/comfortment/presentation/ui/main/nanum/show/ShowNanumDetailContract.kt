@@ -5,10 +5,24 @@ import com.comfortment.presentation.ui.base.BaseView
 interface ShowNanumDetailContract {
 
     interface View : BaseView<Presenter> {
-        fun initDetail()
+        fun initDetail(
+            title: String,
+            price: Int,
+            payAt: Boolean,
+            expiry: Int,
+            description: String?,
+            currentState: String,
+            roomNumber: Int,
+            name: String,
+            phoneNumber: String,
+            bankAccount: String?
+        )
+
+        fun moveBack()
     }
 
     interface Presenter {
-        fun loadNanum()
+        fun loadNanumDetail(nanumId: String)
+        fun joinNanum(nanumId: String)
     }
 }

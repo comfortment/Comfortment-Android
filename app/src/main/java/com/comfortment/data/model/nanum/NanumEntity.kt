@@ -22,7 +22,8 @@ data class NanumEntity(
     @SerializedName("description") val description: String?,
     @SerializedName("referTo") val referTo: String?,
     @SerializedName("payAt") val payAt: String?,
-    @SerializedName("title") val title: String
+    @SerializedName("title") val title: String,
+    @SerializedName("currentState") val currentState: String
 ) : ModelEntity()
 
 class NanumMapper @Inject constructor() : EntityMapper<Nanum, NanumEntity> {
@@ -42,7 +43,8 @@ class NanumMapper @Inject constructor() : EntityMapper<Nanum, NanumEntity> {
             model.description,
             model.referTo,
             model.payAt,
-            model.title
+            model.title,
+            model.currentState
         )
 
     override fun mapToDomain(entity: NanumEntity): Nanum =
@@ -60,6 +62,7 @@ class NanumMapper @Inject constructor() : EntityMapper<Nanum, NanumEntity> {
             entity.description,
             entity.referTo,
             entity.payAt,
-            entity.title
+            entity.title,
+            entity.currentState
         )
 }

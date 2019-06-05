@@ -20,7 +20,7 @@ class NanumAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            nanumView.moveShowDetail(nanumList[position].nanumId)
+            nanumView.moveShowDetail(nanumList[position].nanumId, isRaised)
         }
     }
 

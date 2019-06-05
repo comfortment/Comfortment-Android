@@ -5,8 +5,8 @@ import com.comfortment.domain.repository.nanum.NanumRepository
 import com.comfortment.domain.usecases.UseCase
 import io.reactivex.Single
 
-class ShowNanumDetailUseCase(private val nanumRepository: NanumRepository) :
-    UseCase<ShowNanumDetailUseCase.Params, Single<Nanum>>() {
+class GetNanumDetailUseCase(private val nanumRepository: NanumRepository) :
+    UseCase<GetNanumDetailUseCase.Params, Single<Nanum>>() {
 
     override fun createObservable(params: Params): Single<Nanum> =
         nanumRepository.showNanumDetail(params.accessToken, params.nanumId)

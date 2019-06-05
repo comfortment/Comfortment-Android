@@ -56,7 +56,7 @@ class NanumModule {
 
     @Singleton
     @Provides
-    fun provideShowNanumDetailUseCase(nanumRepositoryImp: NanumRepositoryImp): ShowNanumDetailUseCase =
-        ShowNanumDetailUseCase(nanumRepositoryImp)
+    fun provideShowNanumDetailUseCase(nanumRepositoryImp: NanumRepositoryImp): GetNanumDetailUseCase =
+        GetNanumDetailUseCase(nanumRepositoryImp)
 
 }

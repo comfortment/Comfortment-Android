@@ -24,5 +24,6 @@
 	          android:name="com.comfortment.presentation.ui.main.nanum.show.ShowNanumDetailFragment"
 	          android:label="ShowNanumDetailFragment">
 		<argument android:name="nanumId" app:argType="string"/>
+		<argument android:name="isRaised" app:argType="boolean" android:defaultValue="false"/>
 	</fragment>
 </navigation>
