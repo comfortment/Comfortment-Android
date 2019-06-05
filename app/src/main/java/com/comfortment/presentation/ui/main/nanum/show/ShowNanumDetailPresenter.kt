@@ -1,6 +1,7 @@
 package com.comfortment.presentation.ui.main.nanum.show
 
 import androidx.room.EmptyResultSetException
+import com.comfortment.domain.model.MyMAI
 import com.comfortment.domain.usecases.auth.AuthUseCase
 import com.comfortment.domain.usecases.mai.BringMyMAIUseCase
 import com.comfortment.domain.usecases.nanum.GetNanumDetailUseCase
@@ -19,15 +20,9 @@ class ShowNanumDetailPresenter @Inject constructor(
     BasePresenter<ShowNanumDetailContract.View>(authUseCase, appSchedulerProvider), ShowNanumDetailContract.Presenter {
 
     private var showNanumDetailView: ShowNanumDetailContract.View? = null
-//    private val myMai = bringMyMAIUseCase.createObservable(BringMyMAIUseCase.Params())
-//        .map {
-//            apartmentId = it.id
-//            it
-//        }
-//        .doOnError { EmptyResultSetException("Not found!") }
-//        .blockingGet()e
-
-    lateinit var apartmentId: String
+    private val myMai = bringMyMAIUseCase.createObservable(BringMyMAIUseCase.Params())
+        .doOnError { EmptyResultSetException("Not found!") }
+        .blockingGet(MyMAI())
 
     override fun loadNanumDetail(nanumId: String) {
         showNanumDetailView?.showLoading()
@@ -59,14 +54,18 @@ class ShowNanumDetailPresenter @Inject constructor(
     }
 
     override fun joinNanum(nanumId: String) {
-        compositeDisposable.add(
-            joinNanumUseCase.createObservable(JoinNanumUseCase.Params(accessToken, "", nanumId))
-                .subscribe({
+        if (myMai.id.isNotEmpty()) {
+            compositeDisposable.add(
+                joinNanumUseCase.createObservable(JoinNanumUseCase.Params(accessToken, myMai.id, nanumId))
+                    .subscribe({
 
-                }, {
-
-                })
-        )
+                    }, {
+                        showNanumDetailView?.showToast("현재 오류로 참여가 불가 합니다..")
+                    })
+            )
+        } else {
+            showNanumDetailView?.showToast("자신의 세대 정보를 등록해야\n참여 가능합니다!")
+        }
     }
 
     override fun takeView(view: ShowNanumDetailContract.View) {

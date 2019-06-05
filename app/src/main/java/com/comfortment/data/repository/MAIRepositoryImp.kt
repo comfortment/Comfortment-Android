@@ -8,6 +8,7 @@ import com.comfortment.domain.model.MAI
 import com.comfortment.domain.model.MyMAI
 import com.comfortment.domain.repository.mai.MAIRepository
 import com.comfortment.domain.repository.mai.MyMAIRepository
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Response
@@ -48,7 +49,7 @@ class MAIRepositoryImp @Inject constructor(
     override fun registerAI(accessToken: String, mai: MAI): Observable<Response<Unit>> =
         maiRemoteDataSource.registerAI(accessToken, mai)
 
-    override fun bringAI(): Single<MyMAI> =
+    override fun bringAI(): Maybe<MyMAI> =
         maiLocalDataSource.bringMyMAI()
             .map { data -> myMAIEntityMapper.mapToDomain(data) }
             .doOnError { Throwable("Not found!") }
