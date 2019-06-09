@@ -11,13 +11,23 @@ class NanumModule {
 
     @Singleton
     @Provides
+    fun provideGetJoinNanumUseCase(nanumRepositoryImp: NanumRepositoryImp): GetJoinNanumUseCase =
+        GetJoinNanumUseCase(nanumRepositoryImp)
+
+    @Singleton
+    @Provides
+    fun providePostNanumUseCase(nanumRepositoryImp: NanumRepositoryImp): PostNanumUseCase =
+        PostNanumUseCase(nanumRepositoryImp)
+
+    @Singleton
+    @Provides
     fun provideEditNanumUseCase(nanumRepositoryImp: NanumRepositoryImp): EditNanumUseCase =
         EditNanumUseCase(nanumRepositoryImp)
 
     @Singleton
     @Provides
-    fun provideGetJoinNanumUseCase(nanumRepositoryImp: NanumRepositoryImp): GetJoinNanumUseCase =
-        GetJoinNanumUseCase(nanumRepositoryImp)
+    fun provideUploadImageUseCase(nanumRepositoryImp: NanumRepositoryImp): UploadImageUseCase =
+        UploadImageUseCase(nanumRepositoryImp)
 
     @Singleton
     @Provides
@@ -38,11 +48,6 @@ class NanumModule {
     @Provides
     fun provideJoinNanumUseCase(nanumRepositoryImp: NanumRepositoryImp): JoinNanumUseCase =
         JoinNanumUseCase(nanumRepositoryImp)
-
-    @Singleton
-    @Provides
-    fun providePostNanumUseCase(nanumRepositoryImp: NanumRepositoryImp): PostNanumUseCase =
-        PostNanumUseCase(nanumRepositoryImp)
 
     @Singleton
     @Provides
