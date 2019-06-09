@@ -6,6 +6,7 @@ import com.comfortment.domain.model.Nanum
 import com.comfortment.domain.repository.nanum.NanumRepository
 import io.reactivex.Single
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 class NanumRepositoryImp @Inject constructor(
@@ -52,9 +53,41 @@ class NanumRepositoryImp @Inject constructor(
             title
         )
 
-    override fun editNanum(accessToken: String, apartmentId: String, nanumId: String): Single<Response<Unit>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun editNanum(
+        accessToken: String,
+        apartmentId: String,
+        nanumId: String,
+        type: String,
+        bankAccount: String,
+        bank: String,
+        imagePath: String,
+        price: String,
+        expiry: Int,
+        description: String,
+        refer: String,
+        payAt: String,
+        title: String,
+        currentState: String
+    ): Single<Response<Unit>> =
+        nanumRemoteSource.editNanum(
+            accessToken,
+            apartmentId,
+            nanumId,
+            type,
+            bankAccount,
+            bank,
+            imagePath,
+            price,
+            expiry,
+            description,
+            refer,
+            payAt,
+            title,
+            currentState
+        )
+
+    override fun uploadImage(accessToken: String, imageUrl: String): Single<String> =
+        nanumRemoteSource.uploadImage(accessToken, imageUrl)
 
     override fun showNanumDetail(accessToken: String, nanumId: String): Single<Nanum> =
         nanumRemoteSource.showNanumDetail(accessToken, nanumId)

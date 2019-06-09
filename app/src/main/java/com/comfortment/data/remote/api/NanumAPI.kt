@@ -2,6 +2,7 @@ package com.comfortment.data.remote.api
 
 import com.comfortment.data.model.nanum.NanumEntity
 import io.reactivex.Single
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -20,6 +21,20 @@ interface NanumAPI {
         @Path("apartmentId") apartmentId: String,
         @Body body: Any
     ): Single<Response<Unit>>
+
+    @PATCH("nanum/{apartmentId}/raised/{nanumId}")
+    fun editNanum(
+        @Header("Authorization") accessToken: String,
+        @Path("apartmentId") apartmentId: String,
+        @Path("nanumId") nanumId: String,
+        @Body body: Any
+    ): Single<Response<Unit>>
+
+    @POST("nanum/image")
+    fun uploadImage(
+        @Header("Authorization") accessToken: String,
+        @Part("file\"; filename=\"photo.png") file: RequestBody
+    ): Single<String>
 
     @GET("nanum/{nanumId}")
     fun nanumDetail(
@@ -53,14 +68,6 @@ interface NanumAPI {
         @Header("Authorization") accessToken: String,
         @Path("apartmentId") apartmentId: String
     ): Single<List<NanumEntity>>
-
-    @PATCH("nanum/{apartmentId}/raised/{nanumId}")
-    fun editNanum(
-        @Header("Authorization") accessToken: String,
-        @Path("apartmentId") apartmentId: String,
-        @Path("nanumId") nanumId: String,
-        @Body body: Any
-    ): Single<Response<Unit>>
 
     @PATCH("nanum/{apartmentId}/stared/{nanumId}")
     fun setStarNanum(

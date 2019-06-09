@@ -4,7 +4,10 @@ import com.comfortment.data.remote.api.NanumAPI
 import com.comfortment.presentation.rx.AppSchedulerProvider
 import com.google.gson.JsonObject
 import io.reactivex.Single
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 class NanumRemoteSource @Inject constructor(
@@ -40,13 +43,64 @@ class NanumRemoteSource @Inject constructor(
         json.addProperty("price", price)
         json.addProperty("expiry", expiry)
         json.addProperty("description", description)
-        json.addProperty("refer", refer)
+        json.addProperty("referTo", refer)
         json.addProperty("payAt", payAt)
         json.addProperty("title", title)
+        json.addProperty("currentState", "recruiting")
 
         return nanumAPI.postNanum("Bearer $accessToken", apartmentId, json)
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
+    }
+
+    fun editNanum(
+        accessToken: String,
+        apartmentId: String,
+        nanumId: String,
+        type: String,
+        bankAccount: String,
+        bank: String,
+        imagePath: String,
+        price: String,
+        expiry: Int,
+        description: String,
+        refer: String,
+        payAt: String,
+        title: String,
+        currentState: String
+    ): Single<Response<Unit>> {
+        val json = JsonObject()
+
+        json.addProperty("type", type)
+        json.addProperty("bankAccount", bankAccount)
+        json.addProperty("bank", bank)
+        json.addProperty("imagePath", imagePath)
+        json.addProperty("price", price)
+        json.addProperty("expiry", expiry)
+        json.addProperty("description", description)
+        json.addProperty("referTo", refer)
+        json.addProperty("payAt", payAt)
+        json.addProperty("title", title)
+        json.addProperty("currentState", currentState)
+
+        return nanumAPI.editNanum("Bearer $accessToken", apartmentId, nanumId, json)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+    }
+
+    fun uploadImage(accessToken: String, imageUrl: String): Single<String> {
+        val file = File(imageUrl)
+        val fileReqBody =
+            if (imageUrl.isNotEmpty()) RequestBody.create(MediaType.parse("image/*"), file)
+            else null
+
+        return if (fileReqBody != null) {
+            nanumAPI.uploadImage(accessToken, fileReqBody)
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
+        } else {
+            Single.just("")
+        }
     }
 
     fun showNanumDetail(accessToken: String, nanumId: String) =
