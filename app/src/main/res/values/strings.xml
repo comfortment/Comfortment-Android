@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Comfortment</string>
+	<string name="app_name">Comfortment</string>
 
-    <string name="share">나눔</string>
-    <string name="edit">수정</string>
+	<string name="share">나눔</string>
+	<string name="edit">수정</string>
+
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+	<androidx.appcompat.widget.Toolbar
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			android:orientation="horizontal" android:id="@+id/toolbar2">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+			<ImageView android:id="@+id/back_btn"
+			           android:layout_width="wrap_content"
+			           android:layout_height="wrap_content"
+			           android:padding="24dp"
+			           android:layout_gravity="center_vertical"
+			           android:background="@drawable/ic_keyboard_arrow_left_black"
+			           app:layout_constraintTop_toTopOf="parent"
+			           app:layout_constraintBottom_toBottomOf="parent"
+			           app:layout_constraintStart_toStartOf="parent"/>
+
+			<Switch android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginEnd="8dp"
+			        app:layout_constraintEnd_toStartOf="@+id/guideline11"
+			        app:layout_constraintTop_toTopOf="parent"
+			        app:layout_constraintBottom_toBottomOf="parent"
+			        android:id="@+id/nanum_switch"/>
+
+			<TextView android:layout_width="wrap_content"
+			          android:layout_height="wrap_content"
+			          android:text="업로드"
+			          android:gravity="end"
+			          android:layout_gravity="center_vertical"
+			          android:id="@+id/switch_tv"
+			          android:layout_marginEnd="24dp"
+			          app:layout_constraintEnd_toEndOf="parent"
+			          app:layout_constraintTop_toTopOf="parent"
+			          app:layout_constraintBottom_toBottomOf="parent"
+			          app:layout_constraintStart_toStartOf="@+id/guideline11"
+			          android:layout_marginStart="8dp"/>
+
+			<androidx.constraintlayout.widget.Guideline
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/guideline11"
+					android:orientation="vertical"
+					app:layout_constraintGuide_percent="0.84"/>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.appcompat.widget.Toolbar>
+
+	<androidx.recyclerview.widget.RecyclerView
+			android:id="@id/nanum_list"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+			app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

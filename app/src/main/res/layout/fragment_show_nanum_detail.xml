@@ -24,7 +24,7 @@
 				app:contentScrim="#FAFAFA">
 
 			<ImageView
-					android:id="@+id/backdrop"
+					android:id="@+id/nanum_image"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:scaleType="centerCrop"
@@ -101,7 +101,7 @@
 
 						<TextView android:layout_width="0dp"
 						          android:layout_height="wrap_content"
-						          android:layout_weight="0.1"
+						          android:layout_weight="0.2"
 						          android:text="가격"
 						          android:textSize="12sp"
 						          android:textStyle="bold"
@@ -110,13 +110,12 @@
 						<TextView android:id="@+id/price_tv"
 						          android:layout_width="0dp"
 						          android:layout_height="wrap_content"
-						          android:layout_weight="0.9"
+						          android:layout_weight="0.8"
 						          android:text="20,000원"
 						          android:textSize="12sp"
 						          android:textColor="#FF5722"
-						          android:paddingStart="38dp"
-						          android:paddingLeft="38dp"
-						          tools:ignore="RtlHardcoded,RtlSymmetry"/>
+						          android:paddingStart="12dp"
+						          android:paddingEnd="12dp"/>
 					</LinearLayout>
 
 					<LinearLayout

@@ -5,7 +5,9 @@ import com.comfortment.presentation.ui.main.nanum.NanumFragment
 import com.comfortment.presentation.ui.main.mai.MAIFragment
 import com.comfortment.presentation.ui.main.mai.maiEdit.MAIEditFragment
 import com.comfortment.presentation.ui.main.mai.maiShow.MAIShowFragment
+import com.comfortment.presentation.ui.main.nanum.mine.NanumMineFragment
 import com.comfortment.presentation.ui.main.nanum.show.ShowNanumDetailFragment
+import com.comfortment.presentation.ui.main.nanum.write.NanumWriteFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -30,6 +32,14 @@ abstract class FragmentBindingModule {
 
     @PerFragment
     @ContributesAndroidInjector
+    abstract fun bindingNanumMineFragment(): NanumMineFragment
+
+    @PerFragment
+    @ContributesAndroidInjector
     abstract fun bindingShowNanumDetailFragment(): ShowNanumDetailFragment
+
+    @PerFragment
+    @ContributesAndroidInjector
+    abstract fun bindingNanumWriteFragment(): NanumWriteFragment
 
 }

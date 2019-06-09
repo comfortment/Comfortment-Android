@@ -13,9 +13,9 @@
 	<fragment android:id="@+id/MAIEditFragment"
 	          android:name="com.comfortment.presentation.ui.main.mai.maiEdit.MAIEditFragment"
 	          android:label="MAIEditFragment"/>
-	<fragment android:id="@+id/AOSFragment" android:name="com.comfortment.presentation.ui.main.nanum.NanumFragment"
-	          android:label="AOSFragment">
-		<action android:id="@+id/action_AOSFragment_to_showNanumDetailFragment"
+	<fragment android:id="@+id/nanumFragment" android:name="com.comfortment.presentation.ui.main.nanum.NanumFragment"
+	          android:label="nanumFragment">
+		<action android:id="@+id/action_nanumFragment_to_showNanumDetailFragment"
 		        app:destination="@+id/showNanumDetailFragment"/>
 	</fragment>
 	<activity android:id="@+id/mainActivity" android:name="com.comfortment.presentation.ui.main.MainActivity"
@@ -24,6 +24,19 @@
 	          android:name="com.comfortment.presentation.ui.main.nanum.show.ShowNanumDetailFragment"
 	          android:label="ShowNanumDetailFragment">
 		<argument android:name="nanumId" app:argType="string"/>
-		<argument android:name="isRaised" app:argType="boolean" android:defaultValue="false"/>
+		<argument android:name="isJoined" app:argType="boolean" android:defaultValue="false"/>
+	</fragment>
+	<fragment android:id="@+id/nanumMineFragment"
+	          android:name="com.comfortment.presentation.ui.main.nanum.mine.NanumMineFragment"
+	          android:label="NanumMineFragment">
+		<action android:id="@+id/action_nanumMineFragment_to_showNanumDetailFragment"
+		        app:destination="@id/showNanumDetailFragment"/>
+		<action android:id="@+id/action_nanumMineFragment_to_nanumWriteFragment"
+		        app:destination="@id/nanumWriteFragment"/>
+	</fragment>
+	<fragment android:id="@+id/nanumWriteFragment"
+	          android:name="com.comfortment.presentation.ui.main.nanum.write.NanumWriteFragment"
+	          android:label="NanumWriteFragment">
+		<argument android:name="nanumId" app:argType="string"/>
 	</fragment>
 </navigation>

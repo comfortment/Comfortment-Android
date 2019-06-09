@@ -6,13 +6,15 @@ import com.comfortment.presentation.ui.base.BaseView
 interface NanumContract {
 
     interface View : BaseView<Presenter> {
-        fun moveShowDetail(nanumId: String, isRaised: Boolean)
-        fun initNanumList(nanum: Nanum)
+        fun moveShowDetail(nanumId: String)
+        fun initNanumList(nanum: Nanum, isStar: Boolean)
         fun clearNanumList()
+        fun setItemStarState(position: Int)
     }
 
     interface Presenter {
         fun loadNanumList(type: String, expiry: String)
+        fun loadStarNanumList()
+        fun setStar(position: Int, nanumId: String)
     }
-
 }

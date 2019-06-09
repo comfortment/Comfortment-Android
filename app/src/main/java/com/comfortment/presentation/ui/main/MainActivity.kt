@@ -38,7 +38,7 @@ class MainActivity : BaseActivity() {
             if (currentFabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
-                navController.navigate(R.id.AOSFragment, null, navOptions)
+                navController.navigate(R.id.nanumFragment, null, navOptions)
             }
         }
 
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity() {
         if (navController.currentDestination!!.id == R.id.MAIFragment) {
             finish()
         } else {
-            if (navController.currentDestination!!.id == R.id.AOSFragment) {
+            if (navController.currentDestination!!.id == R.id.nanumFragment) {
                 fab.hide(addVisibilityChanged)
                 invalidateOptionsMenu()
             }
@@ -99,6 +99,21 @@ class MainActivity : BaseActivity() {
             R.id.MAIEditFragment -> {
                 if (navController.currentDestination!!.id != R.id.MAIEditFragment) {
                     navController.navigate(R.id.MAIEditFragment, null, navOptions)
+                }
+            }
+            R.id.NanumFragment -> {
+                if (navController.currentDestination!!.id != R.id.nanumFragment) {
+                    navController.navigate(R.id.nanumFragment, null, navOptions)
+                }
+            }
+            R.id.NanumMineFragment -> {
+                if (navController.currentDestination!!.id != R.id.nanumMineFragment) {
+                    navController.navigate(R.id.nanumMineFragment, null, navOptions)
+                }
+            }
+            R.id.NanumWriteFragment -> {
+                if (navController.currentDestination!!.id != R.id.nanumWriteFragment) {
+                    navController.navigate(R.id.nanumWriteFragment, null, navOptions)
                 }
             }
         }

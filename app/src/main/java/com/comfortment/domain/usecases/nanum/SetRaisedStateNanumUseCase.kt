@@ -9,9 +9,9 @@ class SetRaisedStateNanumUseCase(private val nanumRepository: NanumRepository) :
     UseCase<SetRaisedStateNanumUseCase.Params, Single<Response<Unit>>>() {
 
     override fun createObservable(params: Params): Single<Response<Unit>> =
-        nanumRepository.setRaisedState(params.accessToken, params.apartmentId, params.nanumId)
+        nanumRepository.setRaisedState(params.accessToken, params.apartmentId, params.nanumId, params.currentState)
 
     override fun onCleared() {}
 
-    data class Params(val accessToken: String, val apartmentId: String, val nanumId: String)
+    data class Params(val accessToken: String, val apartmentId: String, val nanumId: String, val currentState: String)
 }

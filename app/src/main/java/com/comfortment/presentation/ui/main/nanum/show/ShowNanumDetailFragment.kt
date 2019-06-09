@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.comfortment.R
 import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
@@ -22,7 +23,7 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
     lateinit var showNanumDetailPresenter: ShowNanumDetailPresenter
 
     private val nanumId by lazy { arguments!!.getString("nanumId") }
-    private val isRaised by lazy { arguments!!.getBoolean("isRaised") }
+    private var isJoined: Boolean = false
 
     override val layoutId: Int
         get() = R.layout.fragment_show_nanum_detail
@@ -30,18 +31,15 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.isJoined = arguments!!.getBoolean("isJoined")
+
         (activity as MainActivity).apply {
             bottom_app_bar.visibility = View.GONE
             fab.hide()
         }
 
-        if (isRaised) {
-            join_btn.isClickable = false
-            ViewCompat.setBackgroundTintList(join_btn, ColorStateList.valueOf(Color.argb(255, 208, 203, 202)))
-        } else {
-            join_btn.setOnClickListener {
-                showNanumDetailPresenter.joinNanum(nanumId)
-            }
+        join_btn.setOnClickListener {
+            showNanumDetailPresenter.joinNanum(nanumId, isJoined)
         }
 
         showNanumDetailPresenter.takeView(this)
@@ -60,6 +58,7 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
 
     @SuppressLint("SetTextI18n")
     override fun initDetail(
+        imagePath: String?,
         title: String,
         price: Int,
         payAt: Boolean,
@@ -71,6 +70,8 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
         phoneNumber: String,
         bankAccount: String?
     ) {
+        Glide.with(context!!).asBitmap().load(imagePath).into(nanum_image)
+
         title_tv.text = title
         price_tv.text = "${price}원"
         if (payAt) {
@@ -110,6 +111,16 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
         phone_number_tv.text = phoneNumber
         bank_tv.text = bankAccount
     }
+
+    override fun setJoinBtnText(isJoined: Boolean) {
+        join_btn.text =
+            if (!isJoined) {
+                "참여"
+            } else "참여 취소"
+
+        this.isJoined = !isJoined
+    }
+
 
     override fun moveBack() {
         findNavController().navigateUp()

@@ -6,6 +6,7 @@ interface ShowNanumDetailContract {
 
     interface View : BaseView<Presenter> {
         fun initDetail(
+            imagePath: String?,
             title: String,
             price: Int,
             payAt: Boolean,
@@ -17,12 +18,12 @@ interface ShowNanumDetailContract {
             phoneNumber: String,
             bankAccount: String?
         )
-
+        fun setJoinBtnText(isJoined: Boolean)
         fun moveBack()
     }
 
     interface Presenter {
         fun loadNanumDetail(nanumId: String)
-        fun joinNanum(nanumId: String)
+        fun joinNanum(nanumId: String, isJoined: Boolean)
     }
 }

@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<item
-			android:id="@+id/navigation_2"
-			android:icon="@drawable/ic_shopping_basket"
+			android:id="@+id/NanumFragment"
+			android:icon="@drawable/ic_format_list_bulleted"
 			android:title="@string/share"
 			app:showAsAction="ifRoom"/>
 
 	<item
-			android:id="@+id/navigation_1"
-			android:icon="@drawable/ic_shopping_basket"
+			android:id="@+id/NanumMineFragment"
+			android:icon="@drawable/ic_folder_shared"
 			android:title="@string/share"
 			app:showAsAction="ifRoom"/>
 
 	<item
-			android:id="@+id/navigation_3"
-			android:icon="@drawable/ic_shopping_basket"
+			android:id="@+id/NanumWriteFragment"
+			android:icon="@drawable/ic_create_new_folder"
 			android:title="@string/share"
 			app:showAsAction="ifRoom"/>
 

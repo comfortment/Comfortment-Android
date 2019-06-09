@@ -28,6 +28,6 @@ interface NanumRepository {
     fun getRaisedNanum(accessToken: String, apartmentId: String): Single<List<Nanum>>
     fun joinNanum(accessToken: String, apartmentId: String, nanumId: String): Single<Response<Unit>>
     fun getJoinNanum(accessToken: String, apartmentId: String): Single<List<Nanum>>
-    fun setRaisedState(accessToken: String, apartmentId: String, nanumId: String): Single<Response<Unit>>
+    fun setRaisedState(accessToken: String, apartmentId: String, nanumId: String, currentState: String): Single<Response<Unit>>
 
 }

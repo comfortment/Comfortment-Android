@@ -26,7 +26,8 @@ interface MaiAPI {
     @Headers("Content-Type: application/json")
     fun floor(
         @Header("Authorization") accessToken: String,
-        @Query("buildingNumber") buildingNumber: String, @Query("floor") floor: String
+        @Query("buildingNumber") buildingNumber: String,
+        @Query("floor") floor: String
     ): Single<List<MAIEntity>>
 
     @POST("register")

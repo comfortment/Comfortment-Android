@@ -12,6 +12,11 @@ class NanumRemoteSource @Inject constructor(
     private val appSchedulerProvider: AppSchedulerProvider
 ) {
 
+    fun getNanum(accessToken: String, type: String, expiry: String) =
+        nanumAPI.getNanum("Bearer $accessToken", type, expiry)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
     fun postNanum(
         accessToken: String,
         apartmentId: String,
@@ -39,13 +44,48 @@ class NanumRemoteSource @Inject constructor(
         json.addProperty("payAt", payAt)
         json.addProperty("title", title)
 
-        return nanumAPI.postNanum(accessToken, apartmentId, json)
+        return nanumAPI.postNanum("Bearer $accessToken", apartmentId, json)
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
     }
 
     fun showNanumDetail(accessToken: String, nanumId: String) =
-        nanumAPI.nanumDetail(accessToken, nanumId)
+        nanumAPI.nanumDetail("Bearer $accessToken", nanumId)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
+    fun starNanum(accessToken: String, apartmentId: String, nanumId: String) =
+        nanumAPI.setStarNanum("Bearer $accessToken", apartmentId, nanumId)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
+    fun getStarNanum(accessToken: String, apartmentId: String) =
+        nanumAPI.getStarNanum("Bearer $accessToken", apartmentId)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
+    fun getRaisedNanum(accessToken: String, apartmentId: String) =
+        nanumAPI.getRaisedNanum("Bearer $accessToken", apartmentId)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
+    fun joinNanum(accessToken: String, apartmentId: String, nanumId: String) =
+        nanumAPI.joinNanum("Bearer $accessToken", apartmentId, nanumId)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
+    fun getJoinNanum(accessToken: String, apartmentId: String) =
+        nanumAPI.getJoinNanum("Bearer $accessToken", apartmentId)
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+
+    fun setRaisedState(
+        accessToken: String,
+        apartmentId: String,
+        nanumId: String,
+        currentState: String
+    ) =
+        nanumAPI.setRaisedStateNanum("Bearer $accessToken", apartmentId, nanumId, currentState)
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
 }

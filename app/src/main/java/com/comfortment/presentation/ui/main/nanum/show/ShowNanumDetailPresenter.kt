@@ -38,6 +38,7 @@ class ShowNanumDetailPresenter @Inject constructor(
                 val bankAccount = "${data.bank} ${data.bankAccount}"
 
                 showNanumDetailView?.initDetail(
+                    data.imagePath,
                     data.title,
                     data.price,
                     payAt,
@@ -53,14 +54,21 @@ class ShowNanumDetailPresenter @Inject constructor(
         })
     }
 
-    override fun joinNanum(nanumId: String) {
+    override fun joinNanum(nanumId: String, isJoined: Boolean) {
         if (myMai.id.isNotEmpty()) {
+            showNanumDetailView?.showLoading()
             compositeDisposable.add(
                 joinNanumUseCase.createObservable(JoinNanumUseCase.Params(accessToken, myMai.id, nanumId))
                     .subscribe({
-
+                        if(it.code() == 200){
+                            showNanumDetailView?.setJoinBtnText(isJoined)
+                        } else {
+                            showNanumDetailView?.showToast("현재 오류로 사용 불가 합니다..")
+                        }
+                        showNanumDetailView?.hideLoading()
                     }, {
-                        showNanumDetailView?.showToast("현재 오류로 참여가 불가 합니다..")
+                        showNanumDetailView?.hideLoading()
+                        showNanumDetailView?.showToast("오류로 사용 불가 합니다..")
                     })
             )
         } else {

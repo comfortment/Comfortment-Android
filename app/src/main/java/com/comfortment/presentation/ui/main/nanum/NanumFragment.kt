@@ -3,12 +3,12 @@ package com.comfortment.presentation.ui.main.nanum
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.comfortment.R
 import com.comfortment.domain.model.Nanum
 import com.comfortment.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_nanum.*
+import kotlinx.android.synthetic.main.nanum_item.view.*
 import javax.inject.Inject
 
 class NanumFragment : BaseFragment(), NanumContract.View {
@@ -16,7 +16,7 @@ class NanumFragment : BaseFragment(), NanumContract.View {
     @Inject
     lateinit var nanumPresenter: NanumPresenter
 
-    private val nanumAdapter = NanumAdapter(false, this)
+    private lateinit var nanumAdapter: NanumAdapter
 
     override val layoutId: Int
         get() = R.layout.fragment_nanum
@@ -34,6 +34,8 @@ class NanumFragment : BaseFragment(), NanumContract.View {
             range_picker.maxValue = if (newVal == 0) 24 else 30
         }
 
+        nanumAdapter = NanumAdapter(nanumPresenter, this)
+
         nanum_list.adapter = nanumAdapter
         nanum_list.layoutManager = LinearLayoutManager(context)
 
@@ -47,19 +49,42 @@ class NanumFragment : BaseFragment(), NanumContract.View {
             }
 
             val expiry =
-                if (date_time_picker.value == 0) String.format("01~%02d%s", range_picker.value, "h")
-                else String.format("01~%02d%s", range_picker.value, "d")
+                if (date_time_picker.value == 0) {
+                    range_picker.value
+                } else {
+                    range_picker.value * 24
+                }
 
-            nanumPresenter.loadNanumList(type, expiry)
+/*            val expiry =
+                if (date_time_picker.value == 0) String.format("%02d%s", range_picker.value, "h")
+                else String.format("%02d%s", range_picker.value, "d")*/
+
+            star_switch.isChecked = false
+
+            nanumPresenter.loadNanumList(type, expiry.toString())
+        }
+
+        star_switch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                nanumPresenter.loadStarNanumList()
+            }
         }
 
         nanumPresenter.takeView(this)
     }
 
-    override fun moveShowDetail(nanumId: String, isRaised: Boolean) =
-        findNavController().navigate(NanumFragmentDirections.actionAOSFragmentToShowNanumDetailFragment(nanumId, isRaised))
+    override fun setItemStarState(position: Int) {
+        nanumAdapter.itemViewList[position].star_btn.setImageResource(R.drawable.ic_star)
+    }
 
-    override fun initNanumList(nanum: Nanum) = nanumAdapter.add(nanum)
+    override fun moveShowDetail(nanumId: String) {
+        NanumFragmentDirections.actionNanumFragmentToShowNanumDetailFragment(nanumId, false)
+    }
+
+    override fun initNanumList(nanum: Nanum, isStar: Boolean) {
+        nanumAdapter.add(nanum)
+        nanumAdapter.isStar = true
+    }
 
     override fun clearNanumList() = nanumAdapter.remove()
 
