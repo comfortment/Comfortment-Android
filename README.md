@@ -17,13 +17,15 @@
 
 아키텍처는 Clean Architecutre + MVP 를 사용했습니다.
 
-**Clean Architecture**
+
 
 ![Clean Architecture](./img/clean.png)
 
-**MVP(Model View Presenter)**
+**Clean Architecture**
 
 ![MVP](./img/mvp.png)
+
+**MVP(Model View Presenter)**
 
 # Architecture Approach
 
