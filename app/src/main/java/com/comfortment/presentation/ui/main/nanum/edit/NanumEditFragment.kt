@@ -42,6 +42,38 @@ class NanumEditFragment : BaseFragment(), NanumEditContract.View {
                 else "선불"
         }
 
+        recruiting_check.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                paid_check.isChecked = false
+                processing_check.isChecked = false
+                done_check.isChecked = false
+            }
+        }
+
+        paid_check.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                recruiting_check.isChecked = false
+                processing_check.isChecked = false
+                done_check.isChecked = false
+            }
+        }
+
+        processing_check.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                recruiting_check.isChecked = false
+                paid_check.isChecked = false
+                done_check.isChecked = false
+            }
+        }
+
+        done_check.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                recruiting_check.isChecked = false
+                paid_check.isChecked = false
+                processing_check.isChecked = false
+            }
+        }
+
         back_btn.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -146,30 +178,10 @@ class NanumEditFragment : BaseFragment(), NanumEditContract.View {
         done_check.isClickable = true
 
         when (nanum.currentState) {
-            "recruiting" -> {
-                recruiting_check.isChecked = true
-                paid_check.isChecked = false
-                processing_check.isChecked = false
-                done_check.isChecked = false
-            }
-            "paid" -> {
-                recruiting_check.isChecked = false
-                paid_check.isChecked = true
-                processing_check.isChecked = false
-                done_check.isChecked = false
-            }
-            "processing" -> {
-                recruiting_check.isChecked = false
-                paid_check.isChecked = false
-                processing_check.isChecked = true
-                done_check.isChecked = false
-            }
-            "done" -> {
-                recruiting_check.isChecked = false
-                paid_check.isChecked = false
-                processing_check.isChecked = false
-                done_check.isChecked = true
-            }
+            "recruiting" -> recruiting_check.isChecked = true
+            "paid" -> paid_check.isChecked = true
+            "processing" -> processing_check.isChecked = true
+            "done" -> done_check.isChecked = true
         }
     }
 

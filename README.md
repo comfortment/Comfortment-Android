@@ -17,8 +17,6 @@
 
 아키텍처는 Clean Architecutre + MVP 를 사용했습니다.
 
-
-
 ![Clean Architecture](./img/clean.png)
 
 **Clean Architecture**
