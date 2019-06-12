@@ -60,7 +60,6 @@
 			          android:layout_marginBottom="6dp"
 			          android:textSize="10sp"
 			          android:text="이것은 설명인 부분"
-			          android:singleLine="true"
 			          android:id="@+id/description_tv"/>
 
 			<LinearLayout android:layout_width="match_parent"
