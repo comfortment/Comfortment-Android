@@ -10,7 +10,6 @@ import com.comfortment.R
 import com.comfortment.domain.model.Nanum
 import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
-import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_nanum.*
 import kotlinx.android.synthetic.main.nanum_item.view.*
@@ -106,10 +105,13 @@ class NanumFragment : BaseFragment(), NanumContract.View {
     }
 
     override fun moveShowDetail(nanumId: String) {
-        (activity as MainActivity).navController.navigate(
-            R.id.showNanumDetailFragment,
-            bundleOf(Pair("nanumId", nanumId), Pair("isJoined", false))
-        )
+        (activity as MainActivity).apply {
+            navController.navigate(
+                R.id.showNanumDetailFragment,
+                bundleOf(Pair("nanumId", nanumId), Pair("isJoined", false)),
+                navOptions
+            )
+        }
     }
 
     override fun initNanumList(nanum: Nanum, isStar: Boolean) {

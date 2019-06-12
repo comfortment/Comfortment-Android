@@ -5,26 +5,23 @@ import androidx.room.EmptyResultSetException
 import com.comfortment.domain.model.MyMAI
 import com.comfortment.domain.usecases.auth.AuthUseCase
 import com.comfortment.domain.usecases.mai.BringMyMAIUseCase
-import com.comfortment.domain.usecases.nanum.EditNanumUseCase
 import com.comfortment.domain.usecases.nanum.GetNanumDetailUseCase
 import com.comfortment.domain.usecases.nanum.PostNanumUseCase
 import com.comfortment.domain.usecases.nanum.UploadImageUseCase
 import com.comfortment.presentation.rx.AppSchedulerProvider
 import com.comfortment.presentation.ui.base.BasePresenter
-import com.comfortment.presentation.ui.main.nanum.edit.NanumEditContract
 import javax.inject.Inject
 
 class NanumWritePresenter @Inject constructor(
     private val uploadImageUseCase: UploadImageUseCase,
     private val postNanumUseCase: PostNanumUseCase,
-    private val editNanumUseCase: EditNanumUseCase,
     private val getNanumDetailUseCase: GetNanumDetailUseCase,
     bringMyMAIUseCase: BringMyMAIUseCase,
     authUseCase: AuthUseCase,
     appSchedulerProvider: AppSchedulerProvider
-) : BasePresenter<NanumEditContract.View>(authUseCase, appSchedulerProvider), NanumEditContract.Presenter {
+) : BasePresenter<NanumWriteContract.View>(authUseCase, appSchedulerProvider), NanumWriteContract.Presenter {
 
-    private var nanumWriteView: NanumEditContract.View? = null
+    private var nanumWriteView: NanumWriteContract.View? = null
     private val myMai = bringMyMAIUseCase.createObservable(BringMyMAIUseCase.Params())
         .doOnError { EmptyResultSetException("Not found!") }
         .blockingGet(MyMAI())
@@ -123,54 +120,9 @@ class NanumWritePresenter @Inject constructor(
                     Log.e("asf", it.message)
                 })
         )
-
     }
 
-    override fun editNanum(
-        nanumId: String,
-        title: String,
-        price: String,
-        payAt: String,
-        type: String,
-        expiry: Int,
-        description: String,
-        bank: String,
-        bankAccount: String,
-        currentState: String,
-        imageUrl: String
-    ) {
-        nanumWriteView?.showLoading()
-        compositeDisposable.add(
-            editNanumUseCase.createObservable(
-                EditNanumUseCase.Params(
-                    accessToken,
-                    myMai.id,
-                    nanumId,
-                    type,
-                    bankAccount,
-                    bank,
-                    imageUrl,
-                    price,
-                    expiry,
-                    description,
-                    "kakao",
-                    payAt,
-                    title,
-                    currentState
-                )
-            ).subscribe({
-                if (it.code() == 201) {
-
-                }
-                nanumWriteView?.hideLoading()
-            }, {
-                nanumWriteView?.showToast("현재 나눔을 수정 할 수 없습니다.")
-                nanumWriteView?.hideLoading()
-            })
-        )
-    }
-
-    override fun takeView(view: NanumEditContract.View) {
+    override fun takeView(view: NanumWriteContract.View) {
         this.nanumWriteView = view
     }
 

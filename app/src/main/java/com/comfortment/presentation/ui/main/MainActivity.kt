@@ -1,11 +1,11 @@
 package com.comfortment.presentation.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.comfortment.R
@@ -22,25 +22,22 @@ class MainActivity : BaseActivity() {
     override val layoutId: Int
         get() = R.layout.activity_main
 
-    val loadingDialog = LoadingDialog.getInstance()
-
     lateinit var navController: NavController
-    private var currentFabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-    private val navOptions = NavOptions.Builder()
+    val navOptions = NavOptions.Builder()
         .setEnterAnim(R.anim.nav_default_enter_anim)
         .setExitAnim(R.anim.nav_default_exit_anim)
         .setPopEnterAnim(R.anim.nav_default_pop_enter_anim)
         .setPopExitAnim(R.anim.nav_default_pop_exit_anim)
         .build()
 
-    private var oldLabel = "MAIFragment"
+    val loadingDialog = LoadingDialog.getInstance()
+
+    private var currentFabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(bottom_app_bar)
-
-        bottom_app_bar.hideOverflowMenu()
 
         bottom_app_bar.setNavigationOnClickListener {
             if (currentFabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER) {
@@ -61,8 +58,36 @@ class MainActivity : BaseActivity() {
         }
 
         navController = findNavController(R.id.main_fragment)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        navController.addOnDestinationChangedListener(destinationChanged)
+    }
+
+    override fun onBackPressed() {
+        if (navController.currentDestination!!.id == R.id.MAIFragment) {
+            finish()
+        } else {
+            if (navController.currentDestination!!.id == R.id.nanumFragment) {
+                fab.hide(addVisibilityChanged)
+                invalidateOptionsMenu()
+            }
+            super.onBackPressed()
+        }
+    }
+
+    private val destinationChanged = object : NavController.OnDestinationChangedListener {
+        var oldLabel = "MAIFragment"
+
+        override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
             when (destination.label.toString()) {
+                "MAIFragment" -> {
+                    if (oldLabel == "nanumFragment" || oldLabel == "NanumMineFragment") {
+                        bottom_app_bar.visibility = View.VISIBLE
+                        bottom_app_bar.toggleFabAlignment()
+                        bottom_app_bar.navigationIcon = resources.getDrawable(R.drawable.ic_shopping_basket, null)
+                        bottom_app_bar.replaceMenu(home_navigation)
+                        currentFabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                        fab.show()
+                    }
+                }
                 "nanumFragment" -> {
                     bottom_app_bar.visibility = View.VISIBLE
                     if (oldLabel != "MAIFragment")
@@ -89,17 +114,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onBackPressed() =
-        if (navController.currentDestination!!.id == R.id.MAIFragment) {
-            finish()
-        } else {
-            if (navController.currentDestination!!.id == R.id.nanumFragment) {
-                fab.hide(addVisibilityChanged)
-                invalidateOptionsMenu()
-            }
-            super.onBackPressed()
-        }
-
     private val addVisibilityChanged = object : FloatingActionButton.OnVisibilityChangedListener() {
         override fun onHidden(fab: FloatingActionButton?) {
             super.onHidden(fab)
@@ -123,7 +137,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun BottomAppBar.toggleFabAlignment() {
+    private fun BottomAppBar.toggleFabAlignment() {
         currentFabAlignmentMode = fabAlignmentMode
         fabAlignmentMode = currentFabAlignmentMode.xor(1)
     }

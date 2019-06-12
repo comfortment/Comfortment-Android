@@ -15,20 +15,16 @@ import com.comfortment.R
 import com.comfortment.domain.model.Nanum
 import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
-import com.comfortment.presentation.ui.main.nanum.edit.NanumEditContract
-import com.comfortment.presentation.ui.main.nanum.edit.NanumEditPresenter
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_nanum_write.*
 import javax.inject.Inject
 
-class NanumWriteFragment : BaseFragment(), NanumEditContract.View {
+class NanumWriteFragment : BaseFragment(), NanumWriteContract.View {
 
-    private val nanumId by lazy { arguments!!.getString("nanumId") }
     private val imgeUrl = StringBuilder()
     private lateinit var imagePath: String
 
     @Inject
-    lateinit var nanumWritePresenter: NanumEditPresenter
+    lateinit var nanumWritePresenter: NanumWritePresenter
 
     override val layoutId: Int
         get() = R.layout.fragment_nanum_write
@@ -94,34 +90,18 @@ class NanumWriteFragment : BaseFragment(), NanumEditContract.View {
             if (imgeUrl.isNotEmpty() && title.isNotEmpty() && price.isNotEmpty() &&
                 description.isNotEmpty() && bank.isNotEmpty() && bankAccount.isNotEmpty()
             ) {
-                if (nanumId == "no") {
-                    nanumWritePresenter.postNanum(
-                        title,
-                        price,
-                        payAt,
-                        type,
-                        expiry,
-                        description,
-                        bank,
-                        bankAccount,
-                        currentState,
-                        imgeUrl.toString()
-                    )
-                } else {
-                    nanumWritePresenter.editNanum(
-                        nanumId,
-                        title,
-                        price,
-                        payAt,
-                        type,
-                        expiry,
-                        description,
-                        bank,
-                        bankAccount,
-                        currentState,
-                        imgeUrl.toString()
-                    )
-                }
+                nanumWritePresenter.postNanum(
+                    title,
+                    price,
+                    payAt,
+                    type,
+                    expiry,
+                    description,
+                    bank,
+                    bankAccount,
+                    currentState,
+                    imgeUrl.toString()
+                )
             } else {
                 showToast("제대로 입력해 주세요.")
             }
@@ -152,10 +132,6 @@ class NanumWriteFragment : BaseFragment(), NanumEditContract.View {
         }
 
         nanumWritePresenter.takeView(this)
-
-        if (nanumId != "no") {
-            nanumWritePresenter.loadNanumData(nanumId)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -125,17 +125,23 @@ class NanumMineFragment : BaseFragment(), NanumMineContract.View {
     }
 
     override fun moveShowDetail(nanumId: String) {
-        (activity as MainActivity).navController.navigate(
-            R.id.showNanumDetailFragment,
-            bundleOf(Pair("nanumId", nanumId), Pair("isJoined", true))
-        )
+        (activity as MainActivity).apply {
+            navController.navigate(
+                R.id.showNanumDetailFragment,
+                bundleOf(Pair("nanumId", nanumId), Pair("isJoined", true)),
+                navOptions
+            )
+        }
     }
 
     override fun moveEdit(nanumId: String) {
-        (activity as MainActivity).navController.navigate(
-            R.id.nanumEditFragment,
-            bundleOf(Pair("nanumId", nanumId))
-        )
+        (activity as MainActivity).apply{
+            navController.navigate(
+                R.id.nanumEditFragment,
+                bundleOf(Pair("nanumId", nanumId)),
+                navOptions
+            )
+        }
     }
 
     override fun showToast(text: String) = Toast.makeText(context, text, Toast.LENGTH_SHORT).show()

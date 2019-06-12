@@ -1,28 +1,20 @@
 package com.comfortment.presentation.ui.main.nanum.edit
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.comfortment.R
 import com.comfortment.domain.model.Nanum
 import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_nanum_write.*
 import javax.inject.Inject
 
 class NanumEditFragment : BaseFragment(), NanumEditContract.View {
 
     private val nanumId by lazy { arguments!!.getString("nanumId") }
-    private val imgeUrl = StringBuilder()
     private lateinit var imagePath: String
 
     @Inject
@@ -43,7 +35,6 @@ class NanumEditFragment : BaseFragment(), NanumEditContract.View {
         date_time_picker.setOnValueChangedListener { _, _, newVal ->
             range_picker.maxValue = if (newVal == 0) 24 else 30
         }
-
 
         pay_at_switch.setOnCheckedChangeListener { _, isChecked ->
             pay_at_tv.text =
@@ -89,63 +80,24 @@ class NanumEditFragment : BaseFragment(), NanumEditContract.View {
                 else -> ""
             }
 
-            if (imgeUrl.isNotEmpty() && title.isNotEmpty() && price.isNotEmpty() &&
+            if (imagePath.isNotEmpty() && title.isNotEmpty() && price.isNotEmpty() &&
                 description.isNotEmpty() && bank.isNotEmpty() && bankAccount.isNotEmpty()
             ) {
-                if (nanumId == "no") {
-                    nanumWritePresenter.postNanum(
-                        title,
-                        price,
-                        payAt,
-                        type,
-                        expiry,
-                        description,
-                        bank,
-                        bankAccount,
-                        currentState,
-                        imgeUrl.toString()
-                    )
-                } else {
-                    nanumWritePresenter.editNanum(
-                        nanumId,
-                        title,
-                        price,
-                        payAt,
-                        type,
-                        expiry,
-                        description,
-                        bank,
-                        bankAccount,
-                        currentState,
-                        imgeUrl.toString()
-                    )
-                }
+                nanumWritePresenter.editNanum(
+                    nanumId,
+                    title,
+                    price,
+                    payAt,
+                    type,
+                    expiry,
+                    description,
+                    bank,
+                    bankAccount,
+                    currentState,
+                    imagePath
+                )
             } else {
                 showToast("제대로 입력해 주세요.")
-            }
-        }
-
-        upload_image.setOnClickListener {
-            try {
-                if (ActivityCompat.checkSelfPermission(
-                        context!!,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        activity!!,
-                        arrayOf(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ),
-                        1
-                    )
-                } else {
-                    val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    startActivityForResult(galleryIntent, 1)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
         }
 
@@ -153,16 +105,6 @@ class NanumEditFragment : BaseFragment(), NanumEditContract.View {
 
         if (nanumId != "no") {
             nanumWritePresenter.loadNanumData(nanumId)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 1) {
-            if (data != null) {
-                Glide.with(context!!).load(data.data).into(upload_image)
-                imgeUrl.delete(0, imgeUrl.length)
-                imgeUrl.append(getRealPathFromURI(data.data!!))
-            }
         }
     }
 
@@ -246,17 +188,4 @@ class NanumEditFragment : BaseFragment(), NanumEditContract.View {
 
     override fun hideLoading() = (activity as MainActivity).loadingDialog.dismiss()
 
-    private fun getRealPathFromURI(contentURI: Uri): String? {
-        val filePath: String?
-        val cursor = context!!.contentResolver.query(contentURI, null, null, null, null)
-        if (cursor == null) {
-            filePath = contentURI.path
-        } else {
-            cursor.moveToFirst()
-            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            filePath = cursor.getString(idx)
-            cursor.close()
-        }
-        return filePath
-    }
 }

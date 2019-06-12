@@ -11,19 +11,6 @@ interface NanumEditContract {
     }
 
     interface Presenter {
-        fun postNanum(
-            title: String,
-            price: String,
-            payAt: String,
-            type: String,
-            expiry: Int,
-            description: String,
-            bank: String,
-            bankAccount: String,
-            currentState: String,
-            imageUrl: String
-        )
-
         fun editNanum(
             nanumId: String,
             title: String,

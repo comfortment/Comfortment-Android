@@ -9,7 +9,6 @@ import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
 import com.comfortment.presentation.ui.main.mai.maiPager.MAICardPagerAdapter
 import com.comfortment.presentation.ui.main.mai.maiPager.ShadowTransformer
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_mai.*
 import javax.inject.Inject
 
@@ -45,7 +44,7 @@ class MAIFragment : BaseFragment(), MAIContract.View, View.OnClickListener {
 
     override fun moveEditPage() {
         (activity as MainActivity).apply {
-            navController.navigate(R.id.MAIEditFragment)
+            navController.navigate(R.id.MAIEditFragment,  null, navOptions)
         }
     }
 
