@@ -30,7 +30,6 @@
 					android:scaleType="centerCrop"
 					android:fitsSystemWindows="true"
 					app:layout_collapseMode="parallax"
-					android:src="@mipmap/ic_launcher"
 					android:foreground="@drawable/nanum_detail_gradient"/>
 
 			<androidx.appcompat.widget.Toolbar
@@ -65,7 +64,6 @@
 			<TextView android:id="@+id/title_tv"
 			          android:layout_width="0dp"
 			          android:layout_height="wrap_content"
-			          android:text="타이틀"
 			          android:textSize="18sp"
 			          android:textStyle="bold"
 			          android:textColor="#5C5A61"
@@ -111,7 +109,6 @@
 						          android:layout_width="0dp"
 						          android:layout_height="wrap_content"
 						          android:layout_weight="0.8"
-						          android:text="20,000원"
 						          android:textSize="12sp"
 						          android:textColor="#FF5722"
 						          android:paddingStart="12dp"
@@ -173,7 +170,6 @@
 						          android:layout_width="0dp"
 						          android:layout_height="wrap_content"
 						          android:layout_weight="0.8"
-						          android:text="20일"
 						          android:textSize="12sp"
 						          android:textColor="#FF5722"
 						          android:paddingStart="12dp"
@@ -201,9 +197,6 @@
 							android:id="@+id/description_tv"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="이것은 우리나라의 국기인 태극기 일러스트입니다.
-어쩌구 저쩌구등등의 이야기를 이곳에 적으시면 됩니다.
-20,000원에 팔 생각입니다."
 							android:textSize="12sp"
 							android:textColor="#5C5A61"
 							app:layout_constraintTop_toBottomOf="@+id/card1"
@@ -415,7 +408,6 @@
 							          android:layout_width="0dp"
 							          android:layout_height="wrap_content"
 							          android:layout_weight="0.8"
-							          android:text="1006호"
 							          android:textSize="10sp"
 							          android:textStyle="normal"
 							          android:textColor="#5C5A61"
@@ -451,7 +443,6 @@
 							          android:layout_width="0dp"
 							          android:layout_height="wrap_content"
 							          android:layout_weight="0.8"
-							          android:text="홍길동"
 							          android:textSize="10sp"
 							          android:textStyle="normal"
 							          android:textColor="#5C5A61"
@@ -487,7 +478,6 @@
 							          android:layout_width="0dp"
 							          android:layout_height="wrap_content"
 							          android:layout_weight="0.8"
-							          android:text="01012345678"
 							          android:textSize="10sp"
 							          android:textStyle="normal"
 							          android:textColor="#5C5A61"
@@ -523,7 +513,6 @@
 							          android:layout_width="0dp"
 							          android:layout_height="wrap_content"
 							          android:layout_weight="0.8"
-							          android:text="3333091072946 카카오뱅크"
 							          android:textSize="10sp"
 							          android:textStyle="normal"
 							          android:textColor="#5C5A61"

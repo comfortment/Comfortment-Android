@@ -3,11 +3,11 @@ package com.comfortment.domain.repository.nanum
 import com.comfortment.domain.model.Nanum
 import io.reactivex.Single
 import retrofit2.Response
-import java.io.File
 
 interface NanumRepository {
 
     fun getNanum(accessToken: String, type: String, expiry: String): Single<List<Nanum>>
+
     fun postNanum(
         accessToken: String,
         apartmentId: String, type: String,

@@ -4,6 +4,7 @@ import com.comfortment.data.remote.api.AuthAPI
 import com.comfortment.data.remote.api.MaiAPI
 import com.comfortment.data.remote.api.NanumAPI
 import com.comfortment.data.remote.url
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -33,7 +34,13 @@ class NetworkModule {
         Retrofit.Builder()
             .baseUrl(url)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder()
+                        .setLenient()
+                        .create()
+                )
+            )
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 

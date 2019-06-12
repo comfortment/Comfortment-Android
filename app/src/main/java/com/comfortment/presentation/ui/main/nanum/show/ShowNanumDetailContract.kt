@@ -8,7 +8,7 @@ interface ShowNanumDetailContract {
         fun initDetail(
             imagePath: String?,
             title: String,
-            price: Int,
+            price: Long,
             payAt: Boolean,
             expiry: Int,
             description: String?,

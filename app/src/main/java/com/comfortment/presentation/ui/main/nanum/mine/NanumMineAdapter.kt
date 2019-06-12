@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.comfortment.R
 import com.comfortment.domain.model.Nanum
-import com.comfortment.presentation.ui.base.BasePresenter
-import com.comfortment.presentation.ui.base.BaseView
 import kotlinx.android.synthetic.main.nanum_item.view.description_tv
 import kotlinx.android.synthetic.main.nanum_item.view.expiry_tv
 import kotlinx.android.synthetic.main.nanum_item.view.nanum_image
@@ -21,8 +19,8 @@ import kotlinx.android.synthetic.main.nanum_raised_item.view.*
 
 class NanumMineAdapter(
     private val isRaised: Boolean,
-    private val nanumPresenter: BasePresenter<*>,
-    private val nanumView: BaseView<*>
+    private val nanumPresenter: NanumMinePresenter,
+    private val nanumView: NanumMineContract.View
 ) : RecyclerView.Adapter<NanumMineAdapter.ViewHolder>() {
 
     private val nanumList = ArrayList<Nanum>()
@@ -39,15 +37,21 @@ class NanumMineAdapter(
 
         holder.itemView.title_tv.text = nanumList[position].title
 
-        Glide.with(holder.itemView.context)
-            .asBitmap()
-            .load(nanumList[position].imagePath)
-            .into(holder.itemView.nanum_image)
+        if (nanumList[position].imagePath != null) {
+            if (nanumList[position].imagePath!!.isNotEmpty()) {
+                Glide.with(holder.itemView.context)
+                    .asBitmap()
+                    .load(nanumList[position].imagePath)
+                    .into(holder.itemView.nanum_image)
+            }
+        }
 
         holder.itemView.description_tv.text = nanumList[position].description
 
         holder.itemView.price_tv.text = "${nanumList[position].price}원"
-        holder.itemView.expiry_tv.text = "${nanumList[position].expiry}일"
+        holder.itemView.expiry_tv.text =
+            if (nanumList[position].expiry < 24) "${nanumList[position].expiry}시간"
+            else "${nanumList[position].expiry / 24}일"
         holder.itemView.state_tv.text = when (nanumList[position].currentState) {
             "recruiting" -> "모집중"
             "paid" -> "결제 완료"
@@ -58,11 +62,11 @@ class NanumMineAdapter(
 
         if (!isRaised) {
             holder.itemView.setOnClickListener {
-                (nanumView as NanumMineContract.View).moveShowDetail(nanumList[position].nanumId)
+                nanumView.moveShowDetail(nanumList[position].nanumId!!)
             }
         } else {
             holder.itemView.setOnClickListener {
-                (nanumView as NanumMineContract.View).moveEdit(nanumList[position].nanumId)
+                nanumView.moveEdit(nanumList[position].nanumId!!)
             }
 
             when (nanumList[position].currentState) {
@@ -92,42 +96,42 @@ class NanumMineAdapter(
                 }
             }
 
-            holder.itemView.recruiting_check.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    (nanumPresenter as NanumMinePresenter).setStateCurrent(
+            holder.itemView.recruiting_check.setOnClickListener {
+                if (holder.itemView.recruiting_check.isChecked) {
+                    nanumPresenter.setStateCurrent(
                         position,
-                        nanumList[position].nanumId,
-                        nanumList[position].currentState,
+                        nanumList[position].nanumId!!,
+                        nanumList[position].currentState!!,
                         "recruiting"
                     )
                 }
             }
-            holder.itemView.paid_check.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    (nanumPresenter as NanumMinePresenter).setStateCurrent(
+            holder.itemView.paid_check.setOnClickListener {
+                if (holder.itemView.paid_check.isChecked) {
+                    nanumPresenter.setStateCurrent(
                         position,
-                        nanumList[position].nanumId,
-                        nanumList[position].currentState,
+                        nanumList[position].nanumId!!,
+                        nanumList[position].currentState!!,
                         "paid"
                     )
                 }
             }
-            holder.itemView.processing_check.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    (nanumPresenter as NanumMinePresenter).setStateCurrent(
+            holder.itemView.processing_check.setOnClickListener {
+                if (holder.itemView.processing_check.isChecked) {
+                    nanumPresenter.setStateCurrent(
                         position,
-                        nanumList[position].nanumId,
-                        nanumList[position].currentState,
+                        nanumList[position].nanumId!!,
+                        nanumList[position].currentState!!,
                         "processing"
                     )
                 }
             }
-            holder.itemView.done_check.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    (nanumPresenter as NanumMinePresenter).setStateCurrent(
+            holder.itemView.done_check.setOnClickListener {
+                if (holder.itemView.done_check.isChecked) {
+                    nanumPresenter.setStateCurrent(
                         position,
-                        nanumList[position].nanumId,
-                        nanumList[position].currentState,
+                        nanumList[position].nanumId!!,
+                        nanumList[position].currentState!!,
                         "done"
                     )
                 }
@@ -138,6 +142,16 @@ class NanumMineAdapter(
     }
 
     override fun getItemCount(): Int = nanumList.size
+
+    override fun onViewAttachedToWindow(holder: ViewHolder) {
+        holder.setIsRecyclable(true)
+        super.onViewAttachedToWindow(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: ViewHolder) {
+        holder.setIsRecyclable(false)
+        super.onViewDetachedFromWindow(holder)
+    }
 
     fun add(nanum: Nanum) {
         nanumList.add(nanum)

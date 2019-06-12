@@ -1,13 +1,17 @@
 package com.comfortment.data.source.nanum
 
+import android.util.Base64
 import com.comfortment.data.remote.api.NanumAPI
 import com.comfortment.presentation.rx.AppSchedulerProvider
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.File
+import java.io.FileInputStream
 import javax.inject.Inject
 
 class NanumRemoteSource @Inject constructor(
@@ -88,19 +92,27 @@ class NanumRemoteSource @Inject constructor(
             .observeOn(appSchedulerProvider.ui())
     }
 
-    fun uploadImage(accessToken: String, imageUrl: String): Single<String> {
+    fun uploadImage(accessToken: String, imageUrl: String): Single<ResponseBody>? {
         val file = File(imageUrl)
-        val fileReqBody =
-            if (imageUrl.isNotEmpty()) RequestBody.create(MediaType.parse("image/*"), file)
-            else null
 
-        return if (fileReqBody != null) {
-            nanumAPI.uploadImage(accessToken, fileReqBody)
+        if (file.isFile) {
+            val bt = ByteArray(file.length().toInt())
+            val fis = FileInputStream(file)
+
+            fis.read(bt)
+            val sbase64 = Base64.encodeToString(bt, 0)
+
+            val filePart = MultipartBody.Part.createFormData(
+                "file",
+                file.name,
+                RequestBody.create(MediaType.parse("text/plain"), sbase64)
+            )
+
+            return nanumAPI.uploadImage(accessToken, filePart)
                 .subscribeOn(appSchedulerProvider.io())
                 .observeOn(appSchedulerProvider.ui())
-        } else {
-            Single.just("")
         }
+        return null
     }
 
     fun showNanumDetail(accessToken: String, nanumId: String) =
@@ -138,8 +150,13 @@ class NanumRemoteSource @Inject constructor(
         apartmentId: String,
         nanumId: String,
         currentState: String
-    ) =
-        nanumAPI.setRaisedStateNanum("Bearer $accessToken", apartmentId, nanumId, currentState)
+    ): Single<Response<Unit>> {
+        val json = JsonObject()
+        json.addProperty("currentState", currentState)
+
+        return nanumAPI.setRaisedStateNanum("Bearer $accessToken", apartmentId, nanumId, json)
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
+    }
+
 }

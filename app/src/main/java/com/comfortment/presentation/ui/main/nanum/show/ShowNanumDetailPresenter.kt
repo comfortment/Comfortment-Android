@@ -1,5 +1,6 @@
 package com.comfortment.presentation.ui.main.nanum.show
 
+import android.util.Log
 import androidx.room.EmptyResultSetException
 import com.comfortment.domain.model.MyMAI
 import com.comfortment.domain.usecases.auth.AuthUseCase
@@ -31,6 +32,7 @@ class ShowNanumDetailPresenter @Inject constructor(
         ).subscribe { data, error ->
             showNanumDetailView?.hideLoading()
             if (error != null || data == null) {
+                Log.e("sdf", error.message)
                 showNanumDetailView?.moveBack()
                 showNanumDetailView?.showToast("상세정보를 볼 수 없습니다...")
             } else {
@@ -39,15 +41,15 @@ class ShowNanumDetailPresenter @Inject constructor(
 
                 showNanumDetailView?.initDetail(
                     data.imagePath,
-                    data.title,
+                    data.title!!,
                     data.price,
                     payAt,
                     data.expiry,
                     data.description,
-                    data.currentState,
-                    data.roomNumber,
-                    data.ownerName,
-                    data.phoneNumber,
+                    data.currentState!!,
+                    data.roomNumber!!,
+                    data.ownerName!!,
+                    data.phoneNumber!!,
                     bankAccount
                 )
             }

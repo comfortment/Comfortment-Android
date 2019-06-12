@@ -1,8 +1,10 @@
 package com.comfortment.data.remote.api
 
-import com.comfortment.data.model.nanum.NanumEntity
+import com.comfortment.data.model.nanum.NanumDetail
+import com.comfortment.data.model.nanum.NanumList
 import io.reactivex.Single
-import okhttp3.RequestBody
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -11,9 +13,9 @@ interface NanumAPI {
     @GET("nanum")
     fun getNanum(
         @Header("Authorization") accessToken: String,
-        @Header("type") type: String,
-        @Header("expiry") expiry: String
-    ): Single<List<NanumEntity>>
+        @Query("type") type: String,
+        @Query("expiry") expiry: String
+    ): Single<NanumList>
 
     @POST("nanum/{apartmentId}/raised")
     fun postNanum(
@@ -30,17 +32,18 @@ interface NanumAPI {
         @Body body: Any
     ): Single<Response<Unit>>
 
+    @Multipart
     @POST("nanum/image")
     fun uploadImage(
         @Header("Authorization") accessToken: String,
-        @Part("file\"; filename=\"photo.png") file: RequestBody
-    ): Single<String>
+        @Part file: MultipartBody.Part
+    ): Single<ResponseBody>
 
     @GET("nanum/{nanumId}")
     fun nanumDetail(
         @Header("Authorization") accessToken: String,
         @Path("nanumId") nanumId: String
-    ): Single<NanumEntity>
+    ): Single<NanumDetail>
 
     @PATCH("nanum/{apartmentId}/joined/{nanumId}")
     fun joinNanum(
@@ -53,21 +56,21 @@ interface NanumAPI {
     fun getJoinNanum(
         @Header("Authorization") accessToken: String,
         @Path("apartmentId") apartmentId: String
-    ): Single<List<NanumEntity>>
+    ): Single<NanumList>
 
     @PATCH("nanum/{apartmentId}/raised/{nanumId}/state")
     fun setRaisedStateNanum(
         @Header("Authorization") accessToken: String,
         @Path("apartmentId") apartmentId: String,
         @Path("nanumId") nanumId: String,
-        @Header("currentState") currentState: String
+        @Body currentState: Any
     ): Single<Response<Unit>>
 
     @GET("nanum/{apartmentId}/raised")
     fun getRaisedNanum(
         @Header("Authorization") accessToken: String,
         @Path("apartmentId") apartmentId: String
-    ): Single<List<NanumEntity>>
+    ): Single<NanumList>
 
     @PATCH("nanum/{apartmentId}/stared/{nanumId}")
     fun setStarNanum(
@@ -80,6 +83,6 @@ interface NanumAPI {
     fun getStarNanum(
         @Header("Authorization") accessToken: String,
         @Path("apartmentId") apartmentId: String
-    ): Single<List<NanumEntity>>
+    ): Single<NanumList>
 
 }

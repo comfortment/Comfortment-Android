@@ -7,6 +7,7 @@ import com.comfortment.presentation.ui.main.mai.maiEdit.MAIEditFragment
 import com.comfortment.presentation.ui.main.mai.maiShow.MAIShowFragment
 import com.comfortment.presentation.ui.main.nanum.mine.NanumMineFragment
 import com.comfortment.presentation.ui.main.nanum.show.ShowNanumDetailFragment
+import com.comfortment.presentation.ui.main.nanum.edit.NanumEditFragment
 import com.comfortment.presentation.ui.main.nanum.write.NanumWriteFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -41,5 +42,9 @@ abstract class FragmentBindingModule {
     @PerFragment
     @ContributesAndroidInjector
     abstract fun bindingNanumWriteFragment(): NanumWriteFragment
+
+    @PerFragment
+    @ContributesAndroidInjector
+    abstract fun bindingNanumEditFragment(): NanumEditFragment
 
 }

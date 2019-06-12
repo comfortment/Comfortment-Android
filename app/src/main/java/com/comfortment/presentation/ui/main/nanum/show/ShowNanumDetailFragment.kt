@@ -1,13 +1,10 @@
 package com.comfortment.presentation.ui.main.nanum.show
 
-import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.comfortment.R
@@ -33,9 +30,12 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
 
         this.isJoined = arguments!!.getBoolean("isJoined")
 
-        (activity as MainActivity).apply {
-            bottom_app_bar.visibility = View.GONE
-            fab.hide()
+        join_btn.text =
+            if (isJoined) "참여 취소"
+            else "참여하기"
+
+        back_btn.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         join_btn.setOnClickListener {
@@ -47,20 +47,10 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
         showNanumDetailPresenter.loadNanumDetail(nanumId)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        (activity as MainActivity).apply {
-            bottom_app_bar.visibility = View.VISIBLE
-            fab.show()
-        }
-    }
-
-    @SuppressLint("SetTextI18n")
     override fun initDetail(
         imagePath: String?,
         title: String,
-        price: Int,
+        price: Long,
         payAt: Boolean,
         expiry: Int,
         description: String?,
@@ -81,7 +71,10 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
             latter_pay_at_tv.setTextColor(Color.argb(255, 255, 87, 34))
             latter_pay_at_tv.typeface = Typeface.DEFAULT_BOLD
         }
-        expiry_tv.text = "${expiry}일"
+
+        expiry_tv.text =
+            if (expiry < 24) "${expiry}시간"
+            else "${expiry / 24}일"
 
         description_tv.text = description
 
@@ -115,8 +108,8 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
     override fun setJoinBtnText(isJoined: Boolean) {
         join_btn.text =
             if (!isJoined) {
-                "참여"
-            } else "참여 취소"
+                "참여취소"
+            } else "참여하기"
 
         this.isJoined = !isJoined
     }
@@ -128,8 +121,12 @@ class ShowNanumDetailFragment : BaseFragment(), ShowNanumDetailContract.View {
 
     override fun showToast(text: String) = Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 
-    override fun showLoading() = loadingDialog.show(fragmentManager, "Loading")
+    override fun showLoading() {
+        (activity as MainActivity).apply {
+            loadingDialog.show(supportFragmentManager, "Loading")
+        }
+    }
 
-    override fun hideLoading() = loadingDialog.dismiss()
+    override fun hideLoading() = (activity as MainActivity).loadingDialog.dismiss()
 
 }

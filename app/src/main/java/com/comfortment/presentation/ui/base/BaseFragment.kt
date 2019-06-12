@@ -12,8 +12,6 @@ abstract class BaseFragment : DaggerFragment() {
     lateinit var rootView: View
     abstract val layoutId: Int
 
-    val loadingDialog = LoadingDialog.getInstance()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(layoutId, container, false)
         return rootView

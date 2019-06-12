@@ -33,10 +33,17 @@
 		        app:destination="@id/showNanumDetailFragment"/>
 		<action android:id="@+id/action_nanumMineFragment_to_nanumWriteFragment"
 		        app:destination="@id/nanumWriteFragment"/>
+		<action android:id="@+id/action_nanumMineFragment_to_nanumEditFragment"
+		        app:destination="@id/nanumEditFragment"/>
 	</fragment>
 	<fragment android:id="@+id/nanumWriteFragment"
 	          android:name="com.comfortment.presentation.ui.main.nanum.write.NanumWriteFragment"
 	          android:label="NanumWriteFragment">
+		<argument android:name="nanumId" app:argType="string" android:defaultValue="no"/>
+	</fragment>
+	<fragment android:id="@+id/nanumEditFragment"
+	          android:name="com.comfortment.presentation.ui.main.nanum.edit.NanumEditFragment"
+	          android:label="NanumEditFragment">
 		<argument android:name="nanumId" app:argType="string"/>
 	</fragment>
 </navigation>

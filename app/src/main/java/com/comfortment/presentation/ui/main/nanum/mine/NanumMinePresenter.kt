@@ -28,7 +28,7 @@ class NanumMinePresenter @Inject constructor(
         .blockingGet(MyMAI())
 
     override fun loadJoinNanum() {
-        nanumMineView?.showLoading()
+       // nanumMineView?.showLoading()
         nanumMineView?.clearNanumList(false)
         compositeDisposable.add(
             getJoinNanumUseCase.createObservable(GetJoinNanumUseCase.Params(accessToken, myMai.id))
@@ -52,7 +52,6 @@ class NanumMinePresenter @Inject constructor(
                     nanumMineView?.initNanumList(it, isStar = false, isRaised = true)
                     nanumMineView?.hideLoading()
                 }, {
-                    Log.e("asdf", it.message)
                     nanumMineView?.hideLoading()
                     nanumMineView?.showToast("검색 결과가 없습니다.")
                 })
@@ -74,9 +73,9 @@ class NanumMinePresenter @Inject constructor(
                     nanumMineView?.setState(position, currentState)
                 } else {
                     nanumMineView?.setState(position, oldCurrentState)
-                    nanumMineView?.hideLoading()
                     nanumMineView?.showToast("상태를 변경할 수 없습니다.")
                 }
+                nanumMineView?.hideLoading()
             }, {
                 nanumMineView?.setState(position, oldCurrentState)
                 nanumMineView?.hideLoading()

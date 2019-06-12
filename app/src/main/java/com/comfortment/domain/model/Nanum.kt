@@ -12,21 +12,23 @@ NanumId = string;
 CurrentState = "recruiting" | "paid" | "processing" | "done";
  */
 data class Nanum(
-    val nanumId: String,
+    val id: String?,
+    val nanumId: String?,
     // from MAI
-    val roomNumber: Int,
-    val ownerName: String,
-    val phoneNumber: String,
+    val apartmentId: String?,
+    val roomNumber: Int?,
+    val ownerName: String?,
+    val phoneNumber: String?,
     // from Nanum
-    val type: String,
+    val type: String?,
     val bankAccount: String?,
     val bank: String?,
     val imagePath: String?,
-    val price: Int,
+    val price: Long,
     val expiry: Int, // 1h == 1
     val description: String?,
     val referTo: String?,
     val payAt: String?,
-    val title: String,
-    val currentState: String
+    val title: String?,
+    val currentState: String?
 ) : Model()

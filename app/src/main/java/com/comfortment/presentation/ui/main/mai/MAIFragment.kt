@@ -9,6 +9,7 @@ import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
 import com.comfortment.presentation.ui.main.mai.maiPager.MAICardPagerAdapter
 import com.comfortment.presentation.ui.main.mai.maiPager.ShadowTransformer
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_mai.*
 import javax.inject.Inject
 
@@ -77,9 +78,12 @@ class MAIFragment : BaseFragment(), MAIContract.View, View.OnClickListener {
         not_found_tv?.visibility = View.INVISIBLE
     }
 
-    override fun showLoading() = loadingDialog.show(fragmentManager, "Loading")
+    override fun showLoading() {
+        if(!(activity as MainActivity).loadingDialog.isAdded)
+            (activity as MainActivity).loadingDialog.show(fragmentManager!!, "Loading")
+    }
 
-    override fun hideLoading() = loadingDialog.dismiss()
+    override fun hideLoading() = (activity as MainActivity).loadingDialog.dismiss()
 
     override fun showToast(text: String) = Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 

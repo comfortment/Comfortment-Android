@@ -3,7 +3,10 @@ package com.comfortment.presentation.ui.main.nanum.mine
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.comfortment.R
 import com.comfortment.domain.model.Nanum
 import com.comfortment.presentation.ui.base.BaseFragment
@@ -18,8 +21,8 @@ class NanumMineFragment : BaseFragment(), NanumMineContract.View {
     @Inject
     lateinit var nanumMinePresenter: NanumMinePresenter
 
-    lateinit var joinedNanumAdapter: NanumMineAdapter
-    lateinit var raisedNanumAdapter: NanumMineAdapter
+    private lateinit var joinedNanumAdapter: NanumMineAdapter
+    private lateinit var raisedNanumAdapter: NanumMineAdapter
 
     override val layoutId: Int
         get() = R.layout.fragment_nanum_mine
@@ -30,8 +33,34 @@ class NanumMineFragment : BaseFragment(), NanumMineContract.View {
         joinedNanumAdapter = NanumMineAdapter(false, nanumMinePresenter, this)
         raisedNanumAdapter = NanumMineAdapter(true, nanumMinePresenter, this)
 
+        nanum_list.setHasFixedSize(true)
         nanum_list.adapter = joinedNanumAdapter
         nanum_list.layoutManager = LinearLayoutManager(context)
+        nanum_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 0) {
+                    (activity as MainActivity).apply {
+                        if (fab.isShown) {
+                            bottom_app_bar.visibility = View.INVISIBLE
+                            fab.hide()
+                        }
+                    }
+                } else if (dy < 0) {
+                    (activity as MainActivity).apply {
+                        if (!fab.isShown) {
+                            bottom_app_bar.visibility = View.VISIBLE
+                            fab.show()
+                        }
+                    }
+                }
+            }
+        })
+
+        back_btn.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         nanum_switch.setOnCheckedChangeListener { _, isChecked ->
             if (!isChecked) {
@@ -43,22 +72,8 @@ class NanumMineFragment : BaseFragment(), NanumMineContract.View {
             }
         }
 
-        (activity as MainActivity).apply {
-            bottom_app_bar.visibility = View.GONE
-            fab.hide()
-        }
-
         nanumMinePresenter.takeView(this)
         nanumMinePresenter.loadJoinNanum()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        (activity as MainActivity).apply {
-            bottom_app_bar.visibility = View.VISIBLE
-            fab.show()
-        }
     }
 
     override fun initNanumList(nanumList: List<Nanum>, isStar: Boolean, isRaised: Boolean) {
@@ -110,16 +125,27 @@ class NanumMineFragment : BaseFragment(), NanumMineContract.View {
     }
 
     override fun moveShowDetail(nanumId: String) {
-        NanumMineFragmentDirections.actionNanumMineFragmentToShowNanumDetailFragment(nanumId, true)
+        (activity as MainActivity).navController.navigate(
+            R.id.showNanumDetailFragment,
+            bundleOf(Pair("nanumId", nanumId), Pair("isJoined", true))
+        )
     }
 
     override fun moveEdit(nanumId: String) {
-        NanumMineFragmentDirections.actionNanumMineFragmentToNanumWriteFragment(nanumId)
+        (activity as MainActivity).navController.navigate(
+            R.id.nanumEditFragment,
+            bundleOf(Pair("nanumId", nanumId))
+        )
     }
 
     override fun showToast(text: String) = Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 
-    override fun showLoading() = loadingDialog.show(fragmentManager, "Loading")
+    override fun showLoading() {
+        (activity as MainActivity).apply {
+            if (!loadingDialog.isRemoving)
+                loadingDialog.show(supportFragmentManager, "Loading")
+        }
+    }
 
-    override fun hideLoading() = loadingDialog.dismiss()
+    override fun hideLoading() = (activity as MainActivity).loadingDialog.dismiss()
 }

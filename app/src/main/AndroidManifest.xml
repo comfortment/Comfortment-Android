@@ -3,8 +3,8 @@
           package="com.comfortment">
 
 	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 	<application
 			android:allowBackup="true"
@@ -35,7 +35,7 @@
 
 		<meta-data
 				android:name="com.google.firebase.messaging.default_notification_icon"
-				android:resource="@drawable/ic_logo" />
+				android:resource="@drawable/ic_logo"/>
 
 		<meta-data
 				android:name="com.kakao.sdk.AppKey"

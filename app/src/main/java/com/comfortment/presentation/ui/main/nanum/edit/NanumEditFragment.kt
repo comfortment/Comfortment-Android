@@ -1,4 +1,4 @@
-package com.comfortment.presentation.ui.main.nanum.write
+package com.comfortment.presentation.ui.main.nanum.edit
 
 import android.Manifest
 import android.content.Intent
@@ -15,13 +15,11 @@ import com.comfortment.R
 import com.comfortment.domain.model.Nanum
 import com.comfortment.presentation.ui.base.BaseFragment
 import com.comfortment.presentation.ui.main.MainActivity
-import com.comfortment.presentation.ui.main.nanum.edit.NanumEditContract
-import com.comfortment.presentation.ui.main.nanum.edit.NanumEditPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_nanum_write.*
 import javax.inject.Inject
 
-class NanumWriteFragment : BaseFragment(), NanumEditContract.View {
+class NanumEditFragment : BaseFragment(), NanumEditContract.View {
 
     private val nanumId by lazy { arguments!!.getString("nanumId") }
     private val imgeUrl = StringBuilder()
@@ -241,7 +239,8 @@ class NanumWriteFragment : BaseFragment(), NanumEditContract.View {
 
     override fun showLoading() {
         (activity as MainActivity).apply {
-            loadingDialog.show(supportFragmentManager, "Loading")
+            if (!loadingDialog.isRemoving)
+                loadingDialog.show(supportFragmentManager, "Loading")
         }
     }
 

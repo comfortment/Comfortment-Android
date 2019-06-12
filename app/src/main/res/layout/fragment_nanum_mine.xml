@@ -11,7 +11,8 @@
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			android:orientation="horizontal" android:id="@+id/toolbar2">
+			android:orientation="horizontal"
+			android:id="@+id/toolbar2">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
@@ -37,7 +38,7 @@
 
 			<TextView android:layout_width="wrap_content"
 			          android:layout_height="wrap_content"
-			          android:text="업로드"
+			          android:text="조인"
 			          android:gravity="end"
 			          android:layout_gravity="center_vertical"
 			          android:id="@+id/switch_tv"
@@ -62,6 +63,7 @@
 			android:id="@id/nanum_list"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
+			android:overScrollMode="never"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/toolbar2"
