@@ -15,6 +15,6 @@ abstract class ActivityBindingModule {
 
     @PerActivity
     @ContributesAndroidInjector
-    abstract fun bindingTestActivity(): StartActivity
+    abstract fun bindingStartActivity(): StartActivity
 
 }

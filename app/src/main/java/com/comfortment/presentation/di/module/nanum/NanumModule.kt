@@ -1,6 +1,7 @@
-package com.comfortment.presentation.di.module
+package com.comfortment.presentation.di.module.nanum
 
 import com.comfortment.data.repository.NanumRepositoryImp
+import com.comfortment.domain.repository.nanum.NanumRepository
 import com.comfortment.domain.usecases.nanum.*
 import dagger.Module
 import dagger.Provides
@@ -8,6 +9,10 @@ import javax.inject.Singleton
 
 @Module
 class NanumModule {
+
+    @Provides
+    @Singleton
+    fun provideNanumRepository(repository: NanumRepositoryImp): NanumRepository = repository
 
     @Singleton
     @Provides

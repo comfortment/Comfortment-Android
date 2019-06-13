@@ -3,6 +3,9 @@ package com.comfortment.presentation.di
 import android.app.Application
 import com.comfortment.presentation.ComfortmentApplication
 import com.comfortment.presentation.di.module.*
+import com.comfortment.presentation.di.module.auth.AuthModule
+import com.comfortment.presentation.di.module.mai.MAIModule
+import com.comfortment.presentation.di.module.nanum.NanumModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -13,8 +16,6 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppModule::class,
-        NetworkModule::class,
-        RepositoryModule::class,
         AuthModule::class,
         MAIModule::class,
         NanumModule::class,

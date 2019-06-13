@@ -7,6 +7,7 @@ import com.comfortment.data.base.EntityMapper
 import com.comfortment.data.base.ModelEntity
 import com.comfortment.domain.model.Auth
 import com.google.gson.annotations.SerializedName
+import javax.inject.Inject
 
 @Entity(tableName = "auth")
 data class AuthEntity(
@@ -15,7 +16,7 @@ data class AuthEntity(
     @SerializedName("refreshToken") @ColumnInfo(name = "refreshToken") val refreshToken: String
 ) : ModelEntity()
 
-class AuthEntityMapper : EntityMapper<Auth, AuthEntity> {
+class AuthEntityMapper @Inject constructor(): EntityMapper<Auth, AuthEntity> {
     override fun mapToDomain(entity: AuthEntity): Auth = Auth(entity.userId, entity.accessToken, entity.refreshToken)
 
     override fun mapToEntity(model: Auth): AuthEntity =

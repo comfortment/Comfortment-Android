@@ -1,6 +1,8 @@
-package com.comfortment.presentation.di.module
+package com.comfortment.presentation.di.module.mai
 
 import com.comfortment.data.repository.MAIRepositoryImp
+import com.comfortment.domain.repository.mai.MAIRepository
+import com.comfortment.domain.repository.mai.MyMAIRepository
 import com.comfortment.domain.usecases.mai.BringMyMAIUseCase
 import com.comfortment.domain.usecases.mai.LoadMyMAIUseCase
 import com.comfortment.domain.usecases.mai.MAIUseCase
@@ -11,6 +13,14 @@ import javax.inject.Singleton
 
 @Module
 class MAIModule {
+
+    @Provides
+    @Singleton
+    fun provideMAIRepository(repository: MAIRepositoryImp): MAIRepository = repository
+
+    @Provides
+    @Singleton
+    fun provideMyMAIRepository(repository: MAIRepositoryImp): MyMAIRepository = repository
 
     @Singleton
     @Provides
